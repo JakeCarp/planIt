@@ -4,33 +4,30 @@
       <div class="card">
         <h3>{{ project.name }}</h3>
         <h4>{{ project.description }}</h4>
-        <form @submit.prevent="editProject">
-          <p class="m-0">Name:</p>
-          <input v-model="editProjectData.name" class="m-2" type="text" />
-          <p class="m-0">Description:</p>
-          <input
-            v-model="editProjectData.description"
-            class="m-2"
-            type="text"
-          />
-          <div>
-            <button class="btn btn-warning">Edit</button>
-          </div>
-        </form>
+
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#projModal"
+          class="btn btn-dark"
+        >
+          Modal
+        </button>
+        <projectFormModal :project="projEditable" />
         <div class="my-3">
-          <div>
-            <button @click="getAllSprints" class="btn btn-warning">
-              Get Sprints
-            </button>
-          </div>
-          <div>CREATE SPRINT</div>
-          <form @submit.prevent="createSprint">
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#sprintModal"
+            class="btn btn-dark"
+          >
+            CREATE SPRINT
+          </button>
+          <!-- <form @submit.prevent="createSprint">
             <p class="m-0">Name:</p>
-            <input v-model="newSprint.name" class="m-2" type="text" />
+            <input v-model="newSprintData.name" class="m-2" type="text" />
             <div>
               <button class="btn btn-success">Add Sprint</button>
             </div>
-          </form>
+          </form> -->
           <div>
             <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
           </div>
@@ -50,13 +47,17 @@ import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { projectsService } from "../services/ProjectsService"
 import { sprintsService } from "../services/SprintsService"
+import { useRoute } from 'vue-router'
 export default {
   props: { project: { type: Object, required: true } },
   setup(props) {
-    const editProjectData = ref({})
+    const route = useRoute()
+    const newSprintData = ref({})
+    const projEditable = computed(() => props.project)
     return {
-      editProjectData,
-      projects: computed(() => AppState.projects),
+      projEditable,
+      route,
+      newSprintData,
       sprints: computed(() => AppState.sprints),
       async editProject() {
         try {
@@ -79,7 +80,7 @@ export default {
       },
       async createSprint() {
         try {
-          await sprintsService.createSprint(newSprintData.value)
+          await sprintsService.createSprint(route.params.projectId, newSprintData.value)
           Pop.toast('Sprint Created', 'success')
         } catch (error) {
           logger.error(error)

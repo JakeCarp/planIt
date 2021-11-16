@@ -17,7 +17,7 @@
                 data-bs-target="#projModal"
                 class="btn btn-dark"
               >
-                Modal
+                Plot a Scheme
               </button>
             </div>
           </div>
@@ -55,7 +55,7 @@ export default {
       projects: computed(() => AppState.projects),
       routeTo(id) {
         logger.log(id)
-        router.push({ name: 'Project', params: { id: id } })
+        router.push({ name: 'Project', params: { projectId: id } })
       },
       async createProject() {
         try {

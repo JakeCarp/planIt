@@ -1,5 +1,7 @@
 <template>
-  <div class="projectsPage"></div>
+  <div class="projectsPage">
+    <project :project="project" />
+  </div>
 </template>
 
 
@@ -10,15 +12,15 @@ import Pop from "../utils/Pop"
 import { useRoute } from "vue-router"
 import { sprintsService } from "../services/SprintsService"
 import { AppState } from "../AppState"
+import { projectsService } from '../services/ProjectsService'
 export default {
   setup() {
     const account = computed(() => AppState.account)
     const route = useRoute()
     onMounted(async () => {
       try {
-        if (account) {
-          await sprintsService.getAll(route.params.id)
-        }
+        await projectsService.getById(route.params.projectId)
+        await sprintsService.getAll(route.params.projectId)
       }
       catch (error) {
         logger.error(error)
@@ -26,6 +28,7 @@ export default {
       }
     })
     return {
+      project: computed(() => AppState.activeProject),
       sprints: computed(() => AppState.sprints)
     }
   }

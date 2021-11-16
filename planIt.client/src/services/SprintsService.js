@@ -16,12 +16,12 @@ async getAll(projectId){
 //   return res.data
 // }
 async createSprint(projectId, data){
-  const res = await api.post('api/projects/'+projectId+'/sprints')
+  const res = await api.post('api/projects/'+projectId+'/sprints', data)
   logger.log('POST SPRINT', res.data)
   AppState.sprints.unshift(res.data)
 }
 async editSprint(data, projectId, id){
-const res = await api.put('api/projects/'+projectId+'/sprints/'+id)
+const res = await api.put('api/projects/'+projectId+'/sprints/'+id, data)
 logger.log('PUT SPRINT', res.data)
 let updated = res.data
 let index = AppState.sprints.findIndex( p => p.id === updated.id)
@@ -30,7 +30,7 @@ AppState.sprints.splice(index, 1, updated)
 async removeProject(projectId, id){
   const res = await api.delete('api/projects/' + projectId + '/sprints/'+id)
   logger.log('REMOVE SPRINT', res.data)
-  AppState.sprints = AppState.sprints.filter( s => s.id !== id)
+  AppState.sprints.filter( s => s.id !== id)
 }
 }
 export const sprintsService = new SprintsService()

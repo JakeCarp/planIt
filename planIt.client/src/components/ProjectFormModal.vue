@@ -12,7 +12,9 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Plot a Scheme</h5>
+            <h5 class="modal-title">
+              {{ project.id ? "Edit Scheme" : "Plot a Scheme" }}
+            </h5>
             <button
               type="button"
               class="btn-close"
@@ -21,7 +23,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="projForm" @submit.prevent="createProject">
+            <form id="projForm" @submit.prevent="handleSubmit">
               <p class="m-0">Name:</p>
               <input v-model="projectData.name" class="m-2" type="text" />
               <p class="m-0">Description:</p>
@@ -42,7 +44,7 @@
               Close
             </button>
             <button type="submit" form="projForm" class="btn btn-primary">
-              Save
+              {{ project.id ? "Save" : "Create" }}
             </button>
           </div>
         </div>
@@ -58,17 +60,32 @@ import { Modal } from "bootstrap"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { projectsService } from "../services/ProjectsService"
+import { watchEffect } from '@vue/runtime-core'
 export default {
-  setup() {
+  props: {
+    project: {
+      type: Object
+    }
+  },
+
+  setup(props) {
     const projectData = ref({})
+    watchEffect(() => {
+      projectData.value = { ...props.project }
+    });
     return {
       projectData,
-      async createProject() {
+      async handleSubmit() {
         try {
-          await projectsService.createProject(projectData.value)
+          if (projectData.value.id) {
+            await projectsService.editProject(projectData.value)
+            Pop.toast('Scheme Edited', 'success')
+          } else {
+            await projectsService.createProject(projectData.value)
+            Pop.toast('Scheme Created', 'success')
+          }
           const modelElem = document.getElementById('projModal')
           Modal.getOrCreateInstance(modelElem).toggle()
-          Pop.toast('Project Created', 'success')
 
         } catch (error) {
           logger.error(error)
@@ -78,6 +95,7 @@ export default {
     }
   }
 }
+
 </script>
 
 

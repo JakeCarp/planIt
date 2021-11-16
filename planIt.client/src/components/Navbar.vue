@@ -1,86 +1,92 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+  <nav
+    class="
+      navbar navbar-expand-lg navbar-dark
+      backbar
+      px-3
+      border1
+      border-4
+      elevation-3
+      d-flex
+      justify-content-between
+    "
+  >
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center logo-container">
-        <img alt="logo" src="../assets/img/villainism.png" class="logo" />
+      <div class="ms-3 d-flex flex-column align-items-center logo-container">
+        <img
+          alt="logo"
+          src="../assets/img/villainism.png"
+          height="60"
+          class="logo"
+        />
       </div>
     </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'About' }"
-            class="btn text-success lighten-30 selectable text-uppercase"
+    <div>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <span class="navbar-text">
+          <button
+            class="
+              btn
+              selectable
+              text-success
+              lighten-30
+              text-uppercase
+              my-2 my-lg-0
+            "
+            @click="login"
+            v-if="!user.isAuthenticated"
           >
-            About
-          </router-link>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <button
-          class="
-            btn
-            selectable
-            text-success
-            lighten-30
-            text-uppercase
-            my-2 my-lg-0
-          "
-          @click="login"
-          v-if="!user.isAuthenticated"
-        >
-          Login
-        </button>
+            Login
+          </button>
 
-        <div class="dropdown my-2 my-lg-0" v-else>
-          <div
-            class="dropdown-toggle selectable"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            id="authDropdown"
-          >
-            <img
-              :src="user.picture"
-              alt="user photo"
-              height="40"
-              class="rounded"
-            />
-            <span class="mx-3 text-success lighten-30">{{ user.name }}</span>
-          </div>
-          <div
-            class="dropdown-menu p-0 list-group w-100"
-            aria-labelledby="authDropdown"
-          >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Manage Account
-              </div>
-            </router-link>
+          <div class="dropdown my-2 my-lg-0" v-else>
             <div
-              class="
-                list-group-item list-group-item-action
-                hoverable
-                text-danger
-              "
-              @click="logout"
+              class="dropdown-toggle selectable"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              id="authDropdown"
             >
-              <i class="mdi mdi-logout"></i>
-              logout
+              <div class="d-flex">
+                <div class="d-flex flex-column">
+                  <h5 class="me-3 mb-0 text-light">
+                    {{ user.villainName }}Villain Name here
+                  </h5>
+                  <p class="text-light me-3 mb-0 text-end">
+                    {{}}Real Name Here
+                  </p>
+                </div>
+                <img
+                  :src="user.picture"
+                  alt="user photo"
+                  height="50"
+                  class="picrounded elevation-2"
+                />
+              </div>
+            </div>
+            <div
+              class="dropdown-menu p-0 list-group w-100"
+              aria-labelledby="authDropdown"
+            >
+              <router-link :to="{ name: 'Account' }">
+                <div class="list-group-item list-group-item-action hoverable">
+                  Manage Account
+                </div>
+              </router-link>
+              <div
+                class="
+                  list-group-item list-group-item-action
+                  hoverable
+                  text-danger
+                "
+                @click="logout"
+              >
+                <i class="mdi mdi-logout"></i>
+                logout
+              </div>
             </div>
           </div>
-        </div>
-      </span>
+        </span>
+      </div>
     </div>
   </nav>
 </template>
@@ -110,10 +116,6 @@ export default {
 </script>
 
 <style scoped>
-.logo {
-  height: 8em;
-  width: auto;
-}
 .dropdown-menu {
   user-select: none;
   display: block;
@@ -136,5 +138,20 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.backbar {
+  background-color: rgb(158, 70, 209);
+}
+.border1 {
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-color: black !important;
+}
+.picrounded {
+  border-radius: 50%;
+}
+.bordcolor {
+  border-color: #00943e !important;
 }
 </style>

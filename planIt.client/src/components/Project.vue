@@ -42,7 +42,7 @@ export default {
       projects: computed(() => AppState.projects),
       async editProject() {
         try {
-          await projectsService.editProject(editProjectData, props.project.id)
+          await projectsService.editProject(editProjectData.value, props.project.id)
           editProjectData.value = ({})
           Pop.toast('Project Edited', 'success')
         } catch (error) {

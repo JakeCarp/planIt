@@ -25,7 +25,7 @@ class ProjectsService {
 
   async update(projData) {
     const project = await this.getById(projData.id)
-    if (project.creatorId.toString() !== projData.creatorid) {
+    if (project.creatorId.toString() !== projData.creatorId) {
       throw new Forbidden('This is not your project')
     }
     const update = await dbContext.Projects.findOneAndUpdate({ _id: projData.id, creatorId: projData.creatorId }, projData, { new: true })

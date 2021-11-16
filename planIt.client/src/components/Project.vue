@@ -20,8 +20,6 @@
         <div>
           <button @click="removeProject" class="btn btn-warning">Remove</button>
         </div>
-
-        <button @click="editProject" class="btn btn-warning">Edit</button>
       </div>
     </div>
   </div>

@@ -5,21 +5,21 @@ class SprintsService {
   async getAll(query = {}) {
     const sprints = await dbContext.Sprints.find(query)
       .populate('creator')
-      .populate('project')
+
     return sprints
   }
 
   async getByProjectId(projId) {
     const sprints = await dbContext.Sprints.find({ projectId: projId })
       .populate('creator')
-      .populate('project')
+
     return sprints
   }
 
   async getById(id) {
     const sprint = await dbContext.Sprints.findById(id)
       .populate('creator')
-      .populate('project')
+
     if (!sprint) {
       throw new BadRequest('Invalid Id')
     }
@@ -30,9 +30,6 @@ class SprintsService {
     const sprint = await dbContext.Sprints.create(sprintData)
     await sprint
       .populate('creator')
-    await sprint
-      .populate('project')
-    return sprint
   }
 
   async update(sprintData) {

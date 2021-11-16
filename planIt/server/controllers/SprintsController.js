@@ -2,7 +2,6 @@ import { Auth0Provider } from '@bcwdev/auth0provider'
 import { projectsService } from '../services/ProjectsService'
 import { sprintsService } from '../services/SprintsService'
 import BaseController from '../utils/BaseController'
-import { logger } from '../utils/Logger'
 
 export class SprintsController extends BaseController {
   constructor() {

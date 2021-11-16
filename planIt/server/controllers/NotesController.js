@@ -1,10 +1,11 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
-import { tasksService } from '../services/TasksService'
+import { notesService } from '../services/NotesService'
+
 import BaseController from '../utils/BaseController'
 
-export class TasksController extends BaseController {
+export class NotesController extends BaseController {
   constructor() {
-    super('api/projects/:projectId/tasks/')
+    super('api/projects/:projectId/notes')
     this.router
       .get('', this.getByProjectId)
       .get('/:id', this.getById)
@@ -16,8 +17,8 @@ export class TasksController extends BaseController {
 
   async getByProjectId(req, res, next) {
     try {
-      const tasks = await tasksService.getByProjectId(req.params.projectId)
-      res.send(tasks)
+      const notes = await notesService.getByProjectId(req.params.projectId)
+      res.send(notes)
     } catch (error) {
       next(error)
     }
@@ -25,8 +26,8 @@ export class TasksController extends BaseController {
 
   async getById(req, res, next) {
     try {
-      const task = await tasksService.getById(req.params.id)
-      res.send(task)
+      const note = await notesService.getById(req.params.id)
+      res.send(note)
     } catch (error) {
       next(error)
     }
@@ -36,8 +37,8 @@ export class TasksController extends BaseController {
     try {
       req.body.creatorId = req.userInfo.id
       req.body.projectId = req.params.projectId
-      const task = await tasksService.create(req.body)
-      res.send(task)
+      const note = await notesService.create(req.body)
+      res.send(note)
     } catch (error) {
       next(error)
     }
@@ -45,10 +46,8 @@ export class TasksController extends BaseController {
 
   async update(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
-      req.body.id = req.params.id
-      const task = await tasksService.update(req.body)
-      return res.send(task)
+      const note = await notesService.update(req.body)
+      return res.send(note)
     } catch (error) {
       next(error)
     }
@@ -57,8 +56,8 @@ export class TasksController extends BaseController {
   async remove(req, res, next) {
     try {
       const userId = req.userInfo.id
-      const taskId = req.params.id
-      await tasksService.remove(taskId, userId)
+      const noteId = req.params.id
+      await notesService.remove(noteId, userId)
       res.send('Deleted')
     } catch (error) {
       next(error)

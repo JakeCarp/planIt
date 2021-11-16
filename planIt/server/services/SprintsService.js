@@ -2,7 +2,7 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class SprintsService {
-  async getAll(query) {
+  async getAll(query = {}) {
     const sprints = await dbContext.Sprints.find(query)
       .populate('creator')
       .populate('project')

@@ -1,36 +1,75 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="home container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-4">
+          <h1>TESTS CREATE PROJECT:</h1>
+          <form @submit.prevent="createProject">
+            <p class="m-0">Name:</p>
+            <input v-model="newProjectData.name" class="m-2" type="text" />
+            <p class="m-0">Description:</p>
+            <input
+              v-model="newProjectData.description"
+              class="m-2"
+              type="text"
+            />
+            <div>
+              <button class="btn btn-success">CREATE PROJECT</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <div>
+            <button @click="getAll" class="btn btn-success ms-5 mb-3">
+              GET ALL PROJECTS
+            </button>
+          </div>
+          <div v-for="proj in projects" :key="proj.id">
+            <Project :project="proj" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { computed, ref } from "@vue/reactivity"
+import { AppState } from "../AppState"
+import { logger } from "../utils/Logger"
+import Pop from "../utils/Pop"
+import { projectsService } from "../services/ProjectsService"
 export default {
-  name: 'Home'
+  setup() {
+    const newProjectData = ref({})
+    const editProjectData = ref({})
+
+    return {
+      newProjectData,
+      projects: computed(() => AppState.projects),
+      async createProject() {
+        try {
+          await projectsService.createProject(newProjectData.value)
+          Pop.toast('Project Created', 'success')
+
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async getAll() {
+        try {
+          await projectsService.getAll()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
+    }
+
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.home{
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card{
-    width: 50vw;
-    > img{
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
 </style>

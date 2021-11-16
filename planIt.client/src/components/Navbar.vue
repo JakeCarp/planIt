@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+      <div class="d-flex flex-column align-items-center logo-container">
+        <img alt="logo" src="../assets/img/villainism.png" class="logo" />
       </div>
     </router-link>
     <button
@@ -110,6 +110,10 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  height: 8em;
+  width: auto;
+}
 .dropdown-menu {
   user-select: none;
   display: block;

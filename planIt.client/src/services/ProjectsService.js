@@ -20,7 +20,7 @@ async createProject(projData){
 }
 async editProject(data, id){
   const res = await api.put('api/projects/'+id, data)
-  logger.log('EDIT PROJECT',res.data)
+  logger.log('EDIT PROJECT', res.data)
   let updated = res.data
   let index = AppState.projects.findIndex( p => p.id === updated.id)
   AppState.projects.splice(index, 1, updated)

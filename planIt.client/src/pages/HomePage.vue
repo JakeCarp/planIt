@@ -3,38 +3,29 @@
     <div class="row">
       <div class="col-12">
         <div class="card m-4">
-          <h1>TESTS CREATE PROJECT:</h1>
-          <form @submit.prevent="createProject">
-            <p class="m-0">Name:</p>
-            <input v-model="newProjectData.name" class="m-2" type="text" />
-            <p class="m-0">Description:</p>
-            <input
-              v-model="newProjectData.description"
-              class="m-2"
-              type="text"
-            />
-            <div>
-              <button class="btn btn-success">CREATE PROJECT</button>
-            </div>
-          </form>
-        </div>
-        <div>
           <div>
-            <button @click="getAll" class="btn btn-success ms-5 mb-3">
-              GET ALL PROJECTS
-            </button>
-          </div>
-          <div
-            v-for="proj in projects"
-            :key="proj.id"
-            @click="routeTo(proj.id)"
-          >
-            {{ proj.name }}
+            <div
+              v-for="proj in projects"
+              :key="proj.id"
+              @click="routeTo(proj.id)"
+            >
+              {{ proj.name }}
+            </div>
+            <div>
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#projModal"
+                class="btn btn-dark"
+              >
+                Modal
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <ProjectFormModal />
 </template>
 
 <script>
@@ -44,10 +35,20 @@ import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { projectsService } from "../services/ProjectsService"
 import { useRouter } from "vue-router"
+import { onMounted } from "@vue/runtime-core"
 export default {
   setup() {
     const newProjectData = ref({})
     const router = useRouter()
+    onMounted(async () => {
+      try {
+        await projectsService.getAll()
+
+      } catch (error) {
+        logger.error(error)
+        Pop.toast(error.message, 'error')
+      }
+    })
     return {
       router,
       newProjectData,
@@ -61,14 +62,6 @@ export default {
           await projectsService.createProject(newProjectData.value)
           Pop.toast('Project Created', 'success')
 
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      },
-      async getAll() {
-        try {
-          await projectsService.getAll()
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

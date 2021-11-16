@@ -12,11 +12,13 @@ import { sprintsService } from "../services/SprintsService"
 import { AppState } from "../AppState"
 export default {
   setup() {
+    const account = computed(() => AppState.account)
     const route = useRoute()
     onMounted(async () => {
       try {
-        await sprintsService.getAll(route.params.id)
-
+        if (account) {
+          await sprintsService.getAll(route.params.id)
+        }
       }
       catch (error) {
         logger.error(error)

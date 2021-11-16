@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { computed, ref } from "@vue/reactivity"
+import { computed, reactive, ref } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
@@ -40,16 +40,6 @@ export default {
   setup() {
     const newProjectData = ref({})
     const router = useRouter()
-    const account = computed(() => AppState.account)
-    onMounted(async () => {
-      try {
-        await projectsService.getAll('?creatorId=' + account.id)
-
-      } catch (error) {
-        logger.error(error)
-        Pop.toast(error.message, 'error')
-      }
-    })
     return {
       router,
       newProjectData,

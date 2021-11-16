@@ -1,9 +1,11 @@
 import { initialize } from '@bcwdev/auth0provider-client'
+import { compile } from '@vue/compiler-dom'
 import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../env'
 import { router } from '../router'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
+import { projectsService } from './ProjectsService'
 import { socketService } from './SocketService'
 
 export const AuthService = initialize({
@@ -27,6 +29,9 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here
+  const accountId = AppState.account.id
+  let query = '?creatorId=' + accountId
+  await projectsService.getAll(query)
 })
 
 async function refreshAuthToken(config) {

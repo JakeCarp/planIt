@@ -40,9 +40,10 @@ export default {
   setup() {
     const newProjectData = ref({})
     const router = useRouter()
+    const account = computed(() => AppState.account)
     onMounted(async () => {
       try {
-        await projectsService.getAll()
+        await projectsService.getAll('?creatorId=' + account.id)
 
       } catch (error) {
         logger.error(error)

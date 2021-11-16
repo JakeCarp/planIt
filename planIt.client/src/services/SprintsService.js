@@ -19,6 +19,7 @@ async createSprint(projectId, data){
   const res = await api.post('api/projects/'+projectId+'/sprints', data)
   logger.log('POST SPRINT', res.data)
   AppState.sprints.unshift(res.data)
+  this.getAll(projectId)
 }
 async editSprint(data, projectId, id){
 const res = await api.put('api/projects/'+projectId+'/sprints/'+id, data)

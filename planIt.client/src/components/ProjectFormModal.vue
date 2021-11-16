@@ -13,7 +13,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">
-              {{ project.id ? "Edit Scheme" : "Plot a Scheme" }}
+              {{ projectData.id ? "Edit Scheme" : "Plot a Scheme" }}
             </h5>
             <button
               type="button"
@@ -44,7 +44,7 @@
               Close
             </button>
             <button type="submit" form="projForm" class="btn btn-primary">
-              {{ project.id ? "Save" : "Create" }}
+              {{ projectData.id ? "Save" : "Create" }}
             </button>
           </div>
         </div>

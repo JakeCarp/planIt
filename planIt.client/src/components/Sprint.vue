@@ -2,7 +2,7 @@
   <div class="sprints">
     <div class="card m-2">
       {{ sprint.name }}
-      {{ sprint.isOpen }}
+      <i v-if="sprint.isOpen" class="mdi mdi-cookie"></i>
     </div>
   </div>
 </template>

@@ -6,7 +6,7 @@ export const SprintSchema = new Schema({
   name: { type: String, required: true },
   projectId: { type: ObjectId, ref: 'Project' },
   creatorId: { type: ObjectId, ref: 'Profile', required: true },
-  isOpen: { type: Boolean }
+  isOpen: { type: Boolean, default: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
 
 SprintSchema.virtual('creator', {

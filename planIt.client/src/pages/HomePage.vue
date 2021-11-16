@@ -24,8 +24,12 @@
               GET ALL PROJECTS
             </button>
           </div>
-          <div v-for="proj in projects" :key="proj.id">
-            <Project :project="proj" />
+          <div
+            v-for="proj in projects"
+            :key="proj.id"
+            @click="routeTo(proj.id)"
+          >
+            {{ proj.name }}
           </div>
         </div>
       </div>
@@ -39,14 +43,19 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { projectsService } from "../services/ProjectsService"
+import { useRouter } from "vue-router"
 export default {
   setup() {
     const newProjectData = ref({})
-    const editProjectData = ref({})
-
+    const router = useRouter()
     return {
+      router,
       newProjectData,
       projects: computed(() => AppState.projects),
+      routeTo(id) {
+        logger.log(id)
+        router.push({ name: 'Project', params: { id: id } })
+      },
       async createProject() {
         try {
           await projectsService.createProject(newProjectData.value)

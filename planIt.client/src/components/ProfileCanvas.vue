@@ -33,13 +33,13 @@
             />
           </div>
           <div class="text-center mb-3" v-if="edit === true">
-            <h4 class="mt-2">Villain Name</h4>
+            <h4 class="mt-2">{{ account.villainName }}</h4>
             <h5 class="mt-2">{{ account.name }}</h5>
           </div>
         </div>
 
         <div v-if="edit === false">
-          <form>
+          <form @submit="editProfile">
             <div class="d-flex flex-column mb-3 mt-3">
               <div class="input-group">
                 <span class="input-group-text">Villain Name</span>
@@ -47,7 +47,7 @@
                   class="form-control"
                   type="text"
                   placeholder=""
-                  name="title"
+                  name="vilainName"
                   v-model="editProfile.villainName"
                 />
               </div>
@@ -59,7 +59,7 @@
                   class="form-control"
                   type="text"
                   placeholder=""
-                  name="title"
+                  name="name"
                   v-model="editProfile.name"
                 />
               </div>
@@ -71,7 +71,7 @@
                   class="form-control"
                   type="text"
                   placeholder=""
-                  name="title"
+                  name="pic-url"
                   v-model="editProfile.pictue"
                 />
               </div>
@@ -130,7 +130,7 @@ import { accountService } from "../services/AccountService"
 export default {
   setup() {
     let edit = ref(true)
-    let editProfile = ref(true)
+    let editProfile = ref({})
 
     return {
       editProfile,

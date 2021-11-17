@@ -29,32 +29,21 @@
               :src="account.picture"
               alt="user photo"
               height="120"
+              width="120"
               class="picrounded elevation-3"
             />
           </div>
           <div class="text-center mb-3" v-if="edit === true">
-            <h4 class="mt-2">{{ account.villainName }}</h4>
-            <h5 class="mt-2">{{ account.name }}</h5>
+            <h4 class="mt-2">{{ account.name }}</h4>
+            <h5 class="mt-2">{{ account.email }}</h5>
           </div>
         </div>
 
         <div v-if="edit === false">
-          <form @submit="editProfile">
-            <div class="d-flex flex-column mb-3 mt-3">
+          <form>
+            <div class="d-flex flex-column mb-3 mt-4">
               <div class="input-group">
-                <span class="input-group-text">Villain Name</span>
-                <input
-                  class="form-control"
-                  type="text"
-                  placeholder=""
-                  name="vilainName"
-                  v-model="editProfile.villainName"
-                />
-              </div>
-            </div>
-            <div class="d-flex flex-column mb-3">
-              <div class="input-group">
-                <span class="input-group-text">Real Name</span>
+                <span class="input-group-text">Vilain Name</span>
                 <input
                   class="form-control"
                   type="text"
@@ -72,13 +61,14 @@
                   type="text"
                   placeholder=""
                   name="pic-url"
-                  v-model="editProfile.pictue"
+                  v-model="editProfile.picture"
                 />
               </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
               <i
-                @click="edit = !edit"
+                type="submit"
+                @click="editAccount"
                 v-if="edit === false"
                 class="
                   mdi mdi-content-save
@@ -89,8 +79,9 @@
                   rounded
                   bg-light
                 "
-                >Save</i
               >
+                Save
+              </i>
             </div>
           </form>
         </div>
@@ -140,6 +131,7 @@ export default {
       async editAccount() {
         try {
           await accountService.editAccount(editProfile.value)
+          edit.value = !edit.value
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message, 'error')
@@ -154,6 +146,7 @@ export default {
 <style lang="scss" scoped>
 .picrounded {
   border-radius: 50%;
+  object-fit: cover;
 }
 .background {
   background: rgb(0, 148, 62);

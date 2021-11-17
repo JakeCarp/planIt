@@ -1,12 +1,26 @@
 <template>
-  <div class="task">
-    <p class="text-light">{{ task.name }}</p>
-    <p>{{ task.weight }}</p>
+  <div class="task row mb-3">
+    <div class="is-complete me-3">
+      <input type="checkbox" v-model="task.isComplete" />
+    </div>
+    <div class="col-4 border border-dark border-3">
+      <p class="m-0">
+        {{ task.name.toUpperCase() }}
+      </p>
+    </div>
+    <div class="col-12 d-flex ps-5">
+      <span>{{ task.weight }} <i class="mdi mdi-account-group pe-3"></i></span>
+      <span>{{ notes.length }} <i class="mdi mdi-chat"></i></span>
+    </div>
   </div>
 </template>
 
 
 <script>
+import { computed } from '@vue/reactivity'
+import { AppState } from '../AppState'
+import { momentService } from '../services/MomentService'
+import { logger } from '../utils/Logger'
 export default {
   props: {
     task: {
@@ -14,12 +28,29 @@ export default {
       required: true
     }
   },
-  setup() {
-    return {}
+  setup(props) {
+    const taskData = ({})
+    return {
+      taskData,
+      timeAgo(time) {
+        logger.log(time)
+        if (!time) {
+          const date = new Date()
+          taskData.completedOn = date
+          return momentService.timeAgo(date)
+        }
+        let timeAgo = momentService.timeAgo(time)
+        return timeAgo
+      },
+      notes: computed(() => AppState.notes.filter(n => n.taskId === props.task.id))
+    }
   }
 }
 </script>
 
 
 <style lang="scss" scoped>
+.is-complete {
+  width: 1em;
+}
 </style>

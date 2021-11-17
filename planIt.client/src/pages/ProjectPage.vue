@@ -4,7 +4,7 @@
       <div class="col-11 align-self-center">
         <div class="row">
           <div class="card spec border-5 p-4 size">
-            <div class="d-flex m-5">
+            <div class="d-flex">
               <div class="margproj">
                 <project :project="project" />
               </div>
@@ -44,7 +44,12 @@
               <div class="accordion" id="accordionExample"></div>
             </div>
             <div>
-              <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
+              <Sprint
+                v-for="(s, index) in sprints"
+                :key="s.id"
+                :sprint="s"
+                :index="index"
+              />
             </div>
           </div>
         </div>

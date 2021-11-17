@@ -1,26 +1,24 @@
 <template>
   <div class="row">
-    <div class="col-12">
-      <div class="d-flex">
-        <h2 class="font">{{ project.name }}</h2>
-        <i
-          data-bs-toggle="modal"
-          data-bs-target="#projModal"
-          class="mdi mdi-pencil ms-4 selectable1"
-        ></i>
-        <i
-          @click="removeProject"
-          class="mdi mdi-close selectable1 text-danger ms-1"
-        ></i>
-      </div>
-      <div>
-        <h4 class="fontonly">{{ project.description }}</h4>
-      </div>
-
-      <projectFormModal :project="project" />
-      <div class="my-3"></div>
-      <div></div>
+    <div class="d-flex">
+      <h3 class="font">{{ project.name }}</h3>
+      <i
+        data-bs-toggle="modal"
+        data-bs-target="#projModal"
+        class="mdi mdi-pencil ms-4 selectable1"
+      ></i>
+      <i
+        @click="removeProject"
+        class="mdi mdi-close selectable1 text-danger ms-1"
+      ></i>
     </div>
+    <div>
+      <p class="fontonly">{{ project.description }}</p>
+    </div>
+
+    <projectFormModal :project="project" />
+    <div class="my-3"></div>
+    <div></div>
   </div>
 </template>
 

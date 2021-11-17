@@ -1,24 +1,27 @@
 <template>
   <div class="sprints">
-    <div class="d-flex justify-content-start collapsestyle">
-      <button
-        class="accordion-button collapsed collapsestyle"
-        type="button"
-        data-bs-toggle="collapse"
-        :data-bs-target="'#a' + sprint.id + 'a'"
-        aria-expanded="false"
-        aria-controls="collapseOne"
-      ></button>
-    </div>
     <div class="accordion-item collapsestyle">
-      <h2 class="accordion-header collapsestyle">
-        <div class="wid d-flex justify-content-between">
-          <div class="codefont">
-            {{ sprint.name }}
-            <i v-if="sprint.isOpen" class="mdi mdi-cookie"></i>
+      <div class="accordion-header collapsestyle d-flex">
+        <div class="wid d-flex justify-content-between align-items-center">
+          <div
+            class="d-flex align-item-center selectable1"
+            data-bs-toggle="collapse"
+            :data-bs-target="'#a' + sprint.id + 'a'"
+            aria-expanded="false"
+            aria-controls="collapseOne"
+          >
+            <div class="codefont mx-3 mt-1 d-flex align-items-center">
+              <h5>
+                {{ sprint.name.toUpperCase() }}
+              </h5>
+            </div>
+            <i
+              v-if="sprint.isOpen"
+              class="mdi mdi-cookie align-self-center"
+            ></i>
           </div>
 
-          <div class="d-flex me-2">
+          <div class="d-flex">
             <div class="d-flex justify-content-center">
               <button
                 class="codefont me-5"
@@ -31,7 +34,7 @@
                 <form>
                   <label class="codefont me-1">Name:</label>
                   <input
-                    class="codefont"
+                    class="codefont me-3 mt-1"
                     type="text"
                     placeholder="...task name"
                     required
@@ -40,7 +43,7 @@
                   />
                   <label class="codefont me-1 ms-1">Goons:</label>
                   <input
-                    class="codefont weightsize"
+                    class="codefont weightsize me-1"
                     type="number"
                     required
                     placeholder="1"
@@ -50,18 +53,22 @@
                     v-model="taskData.weight"
                   />
                   <i
-                    class="mdi mdi-check colorcheck mdi-18px"
+                    class="mdi mdi-check colorcheck mdi-18px me-2"
                     @click="createTask"
                   ></i>
+                  <i
+                    @click="addTaskBtn = !addTaskBtn"
+                    class="mdi mdi-close mdi-18px selectable1 text-danger ms-1"
+                  ></i>
                 </form>
-                <i
-                  @click="addTaskBtn = !addTaskBtn"
-                  class="mdi mdi-close selectable1 text-danger ms-1"
-                ></i>
               </div>
             </div>
             <div class="d-flex">
-              <p>{{tasks.filter(t=> t.)}}/{{ tasks.length }}</p>
+              <p>
+                {{ tasks.filter((t) => t.isComplete).length }}/{{
+                  tasks.length
+                }}
+              </p>
               <i
                 @click="removeSprint"
                 class="mdi mdi-close selectable1 text-danger ms-1"
@@ -69,14 +76,18 @@
             </div>
           </div>
         </div>
-      </h2>
+      </div>
       <div
         :id="'a' + sprint.id + 'a'"
-        class="accordion collapse collapsestyle"
+        :class="
+          index === 0
+            ? 'accordion collapsestyle'
+            : 'accordion collapse collapsestyle'
+        "
         aria-labelledby=""
         data-bs-parent="#accordionExample"
       >
-        <div class="accordion-body collapsestyle">
+        <div class="accordion-body bg-info">
           <Task v-for="t in tasks" :key="t.id" :task="t" />
         </div>
       </div>
@@ -95,7 +106,8 @@ import { AppState } from '../AppState'
 
 export default {
   props: {
-    sprint: { type: Object, required: true }
+    sprint: { type: Object, required: true },
+    index: { type: Number, required: true }
   },
   setup(props) {
     const route = useRoute()
@@ -128,6 +140,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.accordion-button {
+  width: 1em;
+}
 .wid {
   width: 100%;
 }

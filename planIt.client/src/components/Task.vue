@@ -3,7 +3,12 @@
     <div class="is-complete me-3">
       <input type="checkbox" v-model="task.isComplete" />
     </div>
-    <div class="col-4 border border-dark border-3">
+    <div
+      data-bs-toggle="offcanvas"
+      :data-bs-target="'#a' + task.id + 'a'"
+      aria-controls="offcanvasRight"
+      class="col-4 border border-dark border-3 selectable"
+    >
       <p class="m-0">
         {{ task.name.toUpperCase() }}
       </p>
@@ -13,6 +18,7 @@
       <span>{{ notes.length }} <i class="mdi mdi-chat"></i></span>
     </div>
   </div>
+  <taskOffCanvas :task="task" :notes="notes" />
 </template>
 
 

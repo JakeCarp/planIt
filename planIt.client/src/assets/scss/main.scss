@@ -36,3 +36,8 @@ form:invalid button[type="submit"] {
   filter: grayscale(1);
   pointer-events: none;
 }
+
+@font-face {
+  font-family: "Attack Graffiti";
+  src: local("../Font/aAttackGraffiti.ttf") format('truetype')
+}

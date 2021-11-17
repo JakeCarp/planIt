@@ -5,9 +5,9 @@ const ObjectId = mongoose.Types.ObjectId
 export const TaskSchema = new Schema({
   name: { type: String, required: true },
   weight: { type: Number },
-  projectId: { type: ObjectId, ref: 'Project' },
+  projectId: { type: ObjectId, ref: 'Project', required: true },
   sprintId: { type: ObjectId, ref: 'Sprint', required: true },
-  creatorId: { type: ObjectId, ref: 'Profile' },
+  creatorId: { type: ObjectId, ref: 'Profile', required: true },
   isComplete: { type: Boolean },
   completedOn: { type: Date },
   assignedTo: { type: ObjectId, ref: 'Profile' }

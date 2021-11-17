@@ -1,7 +1,7 @@
 <template>
   <div class="sprints">
     <div class="accordion-item collapsestyle">
-      <h2 class="accordion-header collapsestyle">
+      <div class="d-flex justify-content-start">
         <button
           class="accordion-button collapsed collapsestyle"
           type="button"
@@ -9,65 +9,66 @@
           :data-bs-target="'#a' + sprint.id + 'a'"
           aria-expanded="false"
           aria-controls="collapseOne"
-        >
-          <div class="wid d-flex justify-content-between">
-            <div class="codefont">
-              {{ sprint.name }}
-              <i v-if="sprint.isOpen" class="mdi mdi-cookie"></i>
-            </div>
+        ></button>
+      </div>
+      <h2 class="accordion-header collapsestyle">
+        <div class="wid d-flex justify-content-between">
+          <div class="codefont">
+            {{ sprint.name }}
+            <i v-if="sprint.isOpen" class="mdi mdi-cookie"></i>
+          </div>
 
-            <div class="d-flex me-2">
-              <div class="d-flex justify-content-center">
-                <button
-                  class="codefont me-5"
-                  @click="addTaskBtn = !addTaskBtn"
-                  v-if="addTaskBtn === true"
-                >
-                  add task
-                </button>
-                <div v-else class="d-flex me-5">
-                  <form @submit.prevent="createTask">
-                    <label class="codefont me-1">Name:</label>
-                    <input
-                      class="codefont"
-                      type="text"
-                      placeholder="...task name"
-                      required
-                      name="title"
-                      v-model="taskData.name"
-                    />
-                    <label class="codefont me-1 ms-1">Goons:</label>
-                    <input
-                      class="codefont weightsize"
-                      type="number"
-                      required
-                      placeholder="1"
-                      min="1"
-                      max="50"
-                      name="weight"
-                      v-model="taskData.weight"
-                    />
-                    <a
-                      class="mdi mdi-check colorcheck mdi-18px"
-                      type="submit"
-                    ></a>
-                  </form>
+          <div class="d-flex me-2">
+            <div class="d-flex justify-content-center">
+              <button
+                class="codefont me-5"
+                @click="addTaskBtn = !addTaskBtn"
+                v-if="addTaskBtn === true"
+              >
+                add task
+              </button>
+              <div v-else class="d-flex me-5">
+                <form>
+                  <label class="codefont me-1">Name:</label>
+                  <input
+                    class="codefont"
+                    type="text"
+                    placeholder="...task name"
+                    required
+                    name="title"
+                    v-model="taskData.name"
+                  />
+                  <label class="codefont me-1 ms-1">Goons:</label>
+                  <input
+                    class="codefont weightsize"
+                    type="number"
+                    required
+                    placeholder="1"
+                    min="1"
+                    max="50"
+                    name="weight"
+                    v-model="taskData.weight"
+                  />
                   <i
-                    @click="addTaskBtn = !addTaskBtn"
-                    class="mdi mdi-close selectable1 text-danger ms-1"
+                    class="mdi mdi-check colorcheck mdi-18px"
+                    @click="createTask"
                   ></i>
-                </div>
-              </div>
-              <div class="d-flex">
-                <p>ADD TESK COUNT HERE</p>
+                </form>
                 <i
-                  @click="removeSprint"
+                  @click="addTaskBtn = !addTaskBtn"
                   class="mdi mdi-close selectable1 text-danger ms-1"
                 ></i>
               </div>
             </div>
+            <div class="d-flex">
+              <p>ADD TESK COUNT HERE</p>
+              <i
+                @click="removeSprint"
+                class="mdi mdi-close selectable1 text-danger ms-1"
+              ></i>
+            </div>
           </div>
-        </button>
+        </div>
       </h2>
       <div
         :id="'a' + sprint.id + 'a'"

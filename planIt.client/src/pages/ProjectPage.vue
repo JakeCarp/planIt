@@ -10,18 +10,16 @@
               </div>
               <div class="wid"></div>
               <div class="align-self-center">
-                <a
+                <img
                   @click="addSprintBtn = !addSprintBtn"
                   v-if="addSprintBtn === true"
-                >
-                  <img
-                    class="grow"
-                    src="../assets/img/scheme.png"
-                    height="120"
-                    alt=""
-                /></a>
+                  class="grow"
+                  src="../assets/img/scheme.png"
+                  height="120"
+                  alt=""
+                />
                 <div v-else class="d-flex">
-                  <form @submit.prevent="createSprint">
+                  <form>
                     <label class="codefont me-1">Name:</label>
                     <input
                       class="codefont"
@@ -30,10 +28,10 @@
                       name="title"
                       v-model="sprintName.name"
                     />
-                    <a
-                      class="mdi mdi-check colorcheck mdi-18px"
-                      type="submit"
-                    ></a>
+                    <i
+                      class="mdi mdi-check colorcheck mdi-18px selectable"
+                      @click="createSprint"
+                    ></i>
                   </form>
                   <i
                     @click="addSprintBtn = !addSprintBtn"

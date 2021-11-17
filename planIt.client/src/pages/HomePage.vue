@@ -9,17 +9,14 @@
                 <p class="font m-0">Your Plots:</p>
               </div>
               <div class="align-self-end">
-                <a
-                  class="selectable1"
+                <img
                   data-bs-toggle="modal"
                   data-bs-target="#projModal"
-                >
-                  <img
-                    class="grow"
-                    src="../assets/img/newplot.png"
-                    height="130"
-                    alt=""
-                /></a>
+                  class="grow selectable1"
+                  src="../assets/img/newplot.png"
+                  height="130"
+                  alt=""
+                />
               </div>
             </div>
           </div>

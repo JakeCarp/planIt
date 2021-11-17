@@ -4,7 +4,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 export const SprintSchema = new Schema({
   name: { type: String, required: true },
-  projectId: { type: ObjectId, ref: 'Project' },
+  projectId: { type: ObjectId, ref: 'Project', required: true },
   creatorId: { type: ObjectId, ref: 'Profile', required: true },
   isOpen: { type: Boolean, default: true }
 }, { timestamps: true, toJSON: { virtuals: true } })

@@ -20,15 +20,16 @@
       <div v-show="user.isAuthenticated" class="ms-4">
         <div class="d-flex">
           <div class="d-flex flex-column">
-            <h5 class="me-3 mb-0 text-light">
-              {{ account.villainName }}Villain Name here
+            <h5 class="me-3 mb-0 text-light text-end">
+              {{ account.name }}
             </h5>
-            <p class="text-light me-3 mb-0 text-end">{{}}Real Name Here</p>
+            <p class="text-light me-3 mb-0 text-end">{{ account.email }}</p>
           </div>
           <img
             :src="account.picture"
             alt="user photo"
             height="50"
+            width="50"
             class="picrounded elevation-2"
           />
         </div>
@@ -144,6 +145,7 @@ a:hover {
 }
 .picrounded {
   border-radius: 50%;
+  object-fit: cover;
 }
 .bordcolor {
   border-color: #00943e !important;

@@ -11,17 +11,22 @@
       justify-content-between
     "
   >
-    <div>
+    <div
+      class="selectable1"
+      data-bs-toggle="offcanvas"
+      href="#offcanvasExample"
+      role="button"
+    >
       <div v-show="user.isAuthenticated" class="ms-4">
         <div class="d-flex">
           <div class="d-flex flex-column">
             <h5 class="me-3 mb-0 text-light">
-              {{ user.villainName }}Villain Name here
+              {{ account.villainName }}Villain Name here
             </h5>
             <p class="text-light me-3 mb-0 text-end">{{}}Real Name Here</p>
           </div>
           <img
-            :src="user.picture"
+            :src="account.picture"
             alt="user photo"
             height="50"
             class="picrounded elevation-2"
@@ -76,6 +81,7 @@
       </i>
     </div>
   </nav>
+  <ProfileCanvas />
 </template>
 
 <script>
@@ -89,6 +95,7 @@ export default {
     return {
       router,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         await AuthService.loginWithPopup()
         router.push({ name: 'Home' })

@@ -30,21 +30,23 @@
               </div>
             </div>
             <div>
-              <div
-                class="
-                  card
-                  projstrip
-                  mt-3
-                  grow2
-                  elevation-3
-                  selectable1
-                  border-0
-                "
-                v-for="proj in projects"
-                :key="proj.id"
-                @click="routeTo(proj.id)"
-              >
-                <h4 class="p-2 m-0 ms-2 spacing">{{ proj.name }}</h4>
+              <div class="scroll container">
+                <div
+                  class="
+                    card
+                    projstrip
+                    grow2
+                    mt-3
+                    elevation-3
+                    selectable1
+                    border-0
+                  "
+                  v-for="proj in projects"
+                  :key="proj.id"
+                  @click="routeTo(proj.id)"
+                >
+                  <h4 class="p-2 m-0 ms-2 spacing">{{ proj.name }}</h4>
+                </div>
               </div>
             </div>
           </div>
@@ -131,6 +133,10 @@ export default {
 }
 .spacing {
   letter-spacing: 1.7px !important;
+}
+.scroll {
+  height: 28vh;
+  overflow-y: scroll;
 }
 @media only screen and (max-width: 1150px) {
   .backwhite {

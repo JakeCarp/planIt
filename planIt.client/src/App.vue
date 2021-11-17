@@ -2,7 +2,7 @@
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="background">
     <router-view />
   </main>
   <footer></footer>
@@ -22,4 +22,12 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+main {
+  flex-grow: 1;
+}
+.background {
+  background-image: url("./assets/img/purple-abstract-halftone-background_52683-42247.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>

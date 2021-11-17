@@ -135,7 +135,7 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 .backbar {
-  background-color: rgb(158, 70, 209);
+  background-color: #00943e;
 }
 .border1 {
   border-top: 0 !important;

@@ -1,24 +1,26 @@
 <template>
   <div class="home container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="card m-4">
-          <div>
-            <div
-              v-for="proj in projects"
-              :key="proj.id"
-              @click="routeTo(proj.id)"
-            >
-              {{ proj.name }}
-            </div>
+    <div class="row justify-content-center">
+      <div class="col-12 backwhite size">
+        <div class="">
+          <div class="card m-4">
             <div>
-              <button
-                data-bs-toggle="modal"
-                data-bs-target="#projModal"
-                class="btn btn-dark"
+              <div
+                v-for="proj in projects"
+                :key="proj.id"
+                @click="routeTo(proj.id)"
               >
-                Plot a Scheme
-              </button>
+                {{ proj.name }}
+              </div>
+              <div>
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#projModal"
+                  class="btn btn-dark"
+                >
+                  Plot a Scheme
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -65,4 +67,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.backwhite {
+  background-image: url("../assets/img/Large.png");
+  background-size: fill;
+  background-repeat: no-repeat;
+  background-position: 100%;
+}
+.size {
+  height: 89vh;
+}
 </style>

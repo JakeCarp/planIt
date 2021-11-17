@@ -83,7 +83,7 @@
         aria-labelledby=""
         data-bs-parent="#accordionExample"
       >
-        <div class="accordion-body bg-info">
+        <div class="accordion-body bg-info scroll">
           <Task v-for="t in tasks" :key="t.id" :task="t" />
         </div>
       </div>
@@ -136,6 +136,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.scroll {
+  height: 28vh;
+  overflow-y: scroll;
+}
 .accordion-button {
   width: 1em;
 }

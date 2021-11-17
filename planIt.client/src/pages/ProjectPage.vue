@@ -43,7 +43,7 @@
             <div>
               <div class="accordion" id="accordionExample"></div>
             </div>
-            <div>
+            <div class="scroll">
               <Sprint
                 v-for="(s, index) in sprints"
                 :key="s.id"
@@ -143,5 +143,21 @@ export default {
 }
 .colorcheck {
   color: #00943e;
+}
+.scroll {
+  height: 60vh;
+  overflow-y: scroll;
+}
+.scroll::-webkit-scrollbar {
+  width: 0em;
+}
+
+.scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 </style>

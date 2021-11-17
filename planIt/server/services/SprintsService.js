@@ -30,6 +30,7 @@ class SprintsService {
     const sprint = await dbContext.Sprints.create(sprintData)
     await sprint
       .populate('creator')
+    return sprint
   }
 
   async update(sprintData) {

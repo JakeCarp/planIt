@@ -6,7 +6,7 @@ export const TaskSchema = new Schema({
   name: { type: String, required: true },
   weight: { type: Number },
   projectId: { type: ObjectId, ref: 'Project' },
-  sprintId: { type: ObjectId, ref: 'Sprint' },
+  sprintId: { type: ObjectId, ref: 'Sprint', required: true },
   creatorId: { type: ObjectId, ref: 'Profile' },
   isComplete: { type: Boolean },
   completedOn: { type: Date },

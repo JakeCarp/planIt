@@ -1,16 +1,16 @@
 <template>
   <div class="sprints">
+    <div class="d-flex justify-content-start collapsestyle">
+      <button
+        class="accordion-button collapsed collapsestyle"
+        type="button"
+        data-bs-toggle="collapse"
+        :data-bs-target="'#a' + sprint.id + 'a'"
+        aria-expanded="false"
+        aria-controls="collapseOne"
+      ></button>
+    </div>
     <div class="accordion-item collapsestyle">
-      <div class="d-flex justify-content-start">
-        <button
-          class="accordion-button collapsed collapsestyle"
-          type="button"
-          data-bs-toggle="collapse"
-          :data-bs-target="'#a' + sprint.id + 'a'"
-          aria-expanded="false"
-          aria-controls="collapseOne"
-        ></button>
-      </div>
       <h2 class="accordion-header collapsestyle">
         <div class="wid d-flex justify-content-between">
           <div class="codefont">
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="d-flex">
-              <p>ADD TESK COUNT HERE</p>
+              <p>{{tasks.filter(t=> t.)}}/{{ tasks.length }}</p>
               <i
                 @click="removeSprint"
                 class="mdi mdi-close selectable1 text-danger ms-1"

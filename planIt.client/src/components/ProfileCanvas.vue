@@ -39,7 +39,7 @@
         </div>
 
         <div v-if="edit === false">
-          <form @submit="editProfile">
+          <form>
             <div class="d-flex flex-column mb-3 mt-3">
               <div class="input-group">
                 <span class="input-group-text">Villain Name</span>
@@ -78,7 +78,8 @@
             </div>
             <div class="d-flex justify-content-center mt-3">
               <i
-                @click="edit = !edit"
+                type="submit"
+                @click="editAccount"
                 v-if="edit === false"
                 class="
                   mdi mdi-content-save
@@ -89,8 +90,9 @@
                   rounded
                   bg-light
                 "
-                >Save</i
               >
+                Save
+              </i>
             </div>
           </form>
         </div>
@@ -140,6 +142,7 @@ export default {
       async editAccount() {
         try {
           await accountService.editAccount(editProfile.value)
+          edit.value = !edit.value
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message, 'error')

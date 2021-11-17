@@ -27,6 +27,7 @@ import { useRoute } from "vue-router"
 import { sprintsService } from "../services/SprintsService"
 import { AppState } from "../AppState"
 import { projectsService } from '../services/ProjectsService'
+import { tasksService } from '../services/TasksService'
 export default {
   setup() {
     const sprintName = ref({})
@@ -35,6 +36,7 @@ export default {
       try {
         await projectsService.getById(route.params.projectId)
         await sprintsService.getAll(route.params.projectId)
+        await tasksService.getAll(route.params.projectId)
       }
       catch (error) {
         logger.error(error)
@@ -45,9 +47,11 @@ export default {
       sprintName,
       project: computed(() => AppState.activeProject),
       sprints: computed(() => AppState.sprints),
+      tasks: computed(() => AppState.tasks),
       async createSprint() {
         try {
           await sprintsService.createSprint(route.params.projectId, sprintName.value)
+          sprintName.value = {}
           Pop.toast('Phase Created', 'success')
         } catch (error) {
           logger.error(error)

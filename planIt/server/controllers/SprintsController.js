@@ -57,7 +57,7 @@ export class SprintsController extends BaseController {
     try {
       req.body.creatorId = req.userInfo.id
       req.body.id = req.params.id
-      const sprint = await projectsService.update(req.body)
+      const sprint = await sprintsService.update(req.body)
       return res.send(sprint)
     } catch (error) {
       next(error)

@@ -1,18 +1,25 @@
 <template>
   <div class="row">
-    <div class="col-6">
-      <h3>{{ project.name }}</h3>
-      <h4>{{ project.description }}</h4>
-      <i
-        data-bs-toggle="modal"
-        data-bs-target="#projModal"
-        class="mdi mdi-pencil"
-      ></i>
+    <div class="col-12">
+      <div class="d-flex">
+        <h2 class="font">{{ project.name }}</h2>
+        <i
+          data-bs-toggle="modal"
+          data-bs-target="#projModal"
+          class="mdi mdi-pencil ms-4 selectable1"
+        ></i>
+        <i
+          @click="removeProject"
+          class="mdi mdi-close selectable1 text-danger ms-1"
+        ></i>
+      </div>
+      <div>
+        <h4 class="fontonly">{{ project.description }}</h4>
+      </div>
+
       <projectFormModal :project="project" />
       <div class="my-3"></div>
-      <div>
-        <button @click="removeProject" class="btn btn-warning">Remove</button>
-      </div>
+      <div></div>
     </div>
   </div>
 </template>
@@ -21,14 +28,18 @@
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { projectsService } from "../services/ProjectsService"
+import { useRouter } from "vue-router"
 export default {
   props: { project: { type: Object, required: true } },
   setup(props) {
+    const router = useRouter()
     return {
+      router,
       async removeProject() {
         try {
           await projectsService.removeProject(props.project.id)
           Pop.toast('Project Removed', 'success')
+          router.push({ name: 'Home' })
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
@@ -41,4 +52,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.font {
+  font-family: "Bangers", cursive;
+  letter-spacing: 1.2px;
+
+  font-size: 7vh !important;
+}
+.fontonly {
+  font-family: "Bangers", cursive;
+  letter-spacing: 1.5px;
+}
 </style>

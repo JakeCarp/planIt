@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <p>{{ task.name }}</p>
+    <p class="text-light">{{ task.name }}</p>
     <p>{{ task.weight }}</p>
   </div>
 </template>

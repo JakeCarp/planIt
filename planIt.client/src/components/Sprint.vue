@@ -1,28 +1,84 @@
 <template>
   <div class="sprints">
-    <div class="card m-2">
-      {{ sprint.name }}
-      <i v-if="sprint.isOpen" class="mdi mdi-cookie"></i>
-      <form @submit.prevent="createTask">
-        <input
-          type="text"
-          placeholder="...add task"
-          required
-          name="title"
-          v-model="taskData.name"
-        />
-        <input
-          type="number"
-          required
-          placeholder="1"
-          min="1"
-          max="50"
-          name="weight"
-          v-model="taskData.weight"
-        />
-        <button type="submit">+</button>
-      </form>
-      <task v-for="t in tasks" :key="t.id" :task="t" />
+    <div class="accordion-item collapsestyle">
+      <h2 class="accordion-header collapsestyle">
+        <button
+          class="accordion-button collapsed collapsestyle"
+          type="button"
+          data-bs-toggle="collapse"
+          :data-bs-target="'#a' + sprint.id + 'a'"
+          aria-expanded="false"
+          aria-controls="collapseOne"
+        >
+          <div class="wid d-flex justify-content-between">
+            <div class="codefont">
+              {{ sprint.name }}
+              <i v-if="sprint.isOpen" class="mdi mdi-cookie"></i>
+            </div>
+
+            <div class="d-flex me-2">
+              <div class="d-flex justify-content-center">
+                <button
+                  class="codefont me-5"
+                  @click="addTaskBtn = !addTaskBtn"
+                  v-if="addTaskBtn === true"
+                >
+                  add task
+                </button>
+                <div v-else class="d-flex me-5">
+                  <form @submit.prevent="createTask">
+                    <label class="codefont me-1">Name:</label>
+                    <input
+                      class="codefont"
+                      type="text"
+                      placeholder="...task name"
+                      required
+                      name="title"
+                      v-model="taskData.name"
+                    />
+                    <label class="codefont me-1 ms-1">Goons:</label>
+                    <input
+                      class="codefont weightsize"
+                      type="number"
+                      required
+                      placeholder="1"
+                      min="1"
+                      max="50"
+                      name="weight"
+                      v-model="taskData.weight"
+                    />
+                    <a
+                      class="mdi mdi-check colorcheck mdi-18px"
+                      type="submit"
+                    ></a>
+                  </form>
+                  <i
+                    @click="addTaskBtn = !addTaskBtn"
+                    class="mdi mdi-close selectable1 text-danger ms-1"
+                  ></i>
+                </div>
+              </div>
+              <div class="d-flex">
+                <p>ADD TESK COUNT HERE</p>
+                <i
+                  @click="removeSprint"
+                  class="mdi mdi-close selectable1 text-danger ms-1"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </button>
+      </h2>
+      <div
+        :id="'a' + sprint.id + 'a'"
+        class="accordion collapse collapsestyle"
+        aria-labelledby=""
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body collapsestyle">
+          <Task v-for="t in tasks" :key="t.id" :task="t" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -43,13 +99,15 @@ export default {
   setup(props) {
     const route = useRoute()
     const taskData = ref({})
-
+    let addTaskBtn = ref(true)
     logger.log(taskData)
     return {
+      addTaskBtn,
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId === props.sprint.id)),
       taskData,
       async createTask() {
         try {
+          addTaskBtn.value = true;
           logger.log(taskData.value)
           taskData.value.sprintId = props.sprint.id
           await tasksService.createTask(route.params.projectId, taskData.value)
@@ -58,6 +116,9 @@ export default {
           logger.error(error)
           Pop.toast(error.message, 'error')
         }
+      },
+      async removeSprint() {
+
       }
     }
   }
@@ -66,4 +127,25 @@ export default {
 
 
 <style lang="scss" scoped>
+.wid {
+  width: 100%;
+}
+.middle {
+  margin-right: 50%;
+}
+.codefont {
+  font-family: "Fira Code", monospace;
+}
+.colorcheck {
+  color: #00943e;
+}
+.weightsize {
+  width: 5vh;
+}
+.collapsestyle {
+  border-width: 3px !important;
+  border-color: #00943e !important;
+  border-radius: 0;
+  background: #e4e4e4;
+}
 </style>

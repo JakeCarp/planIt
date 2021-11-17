@@ -11,6 +11,24 @@
       justify-content-between
     "
   >
+    <div>
+      <div v-show="user.isAuthenticated" class="ms-4">
+        <div class="d-flex">
+          <div class="d-flex flex-column">
+            <h5 class="me-3 mb-0 text-light">
+              {{ user.villainName }}Villain Name here
+            </h5>
+            <p class="text-light me-3 mb-0 text-end">{{}}Real Name Here</p>
+          </div>
+          <img
+            :src="user.picture"
+            alt="user photo"
+            height="50"
+            class="picrounded elevation-2"
+          />
+        </div>
+      </div>
+    </div>
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="ms-3 d-flex flex-column align-items-center logo-container">
         <img
@@ -21,67 +39,41 @@
         />
       </div>
     </router-link>
-    <div>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <span class="navbar-text">
-          <button
-            class="
-              btn
-              selectable
-              text-success
-              lighten-30
-              text-uppercase
-              my-2 my-lg-0
-            "
-            @click="login"
-            v-if="!user.isAuthenticated"
-          >
-            Login
-          </button>
-
-          <div class="dropdown my-2 my-lg-0" v-else>
-            <div
-              class="dropdown-toggle selectable"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              id="authDropdown"
-            >
-              <div class="d-flex">
-                <div class="d-flex flex-column">
-                  <h5 class="me-3 mb-0 text-light">
-                    {{ user.villainName }}Villain Name here
-                  </h5>
-                  <p class="text-light me-3 mb-0 text-end">
-                    {{}}Real Name Here
-                  </p>
-                </div>
-                <img
-                  :src="user.picture"
-                  alt="user photo"
-                  height="50"
-                  class="picrounded elevation-2"
-                />
-              </div>
-            </div>
-            <div
-              class="dropdown-menu p-0 list-group w-100"
-              aria-labelledby="authDropdown"
-            >
-              <div
-                class="
-                  list-group-item list-group-item-action
-                  hoverable
-                  text-danger
-                "
-                @click="logout"
-              >
-                <i class="mdi mdi-logout"></i>
-                logout
-              </div>
-            </div>
-          </div>
-        </span>
-      </div>
+    <i
+      v-if="user.isAuthenticated"
+      @click="logout"
+      class="
+        mdi-18px
+        selectable
+        border border-dark border-3
+        fs-5
+        text-light
+        p-1
+        px-2
+        pb-2
+        me-4
+      "
+    >
+      Logout
+    </i>
+    <div v-else>
+      <i
+        v-show="!user.isAuthenticated"
+        @click="login"
+        class="
+          mdi-18px
+          selectable
+          fs-5
+          border border-dark border-3
+          p-1
+          px-2
+          pb-2
+          me-4
+          text-light
+        "
+      >
+        Login
+      </i>
     </div>
   </nav>
 </template>

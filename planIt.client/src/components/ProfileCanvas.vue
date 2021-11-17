@@ -1,5 +1,5 @@
 <template>
-  <div class="projectSelectorCanvas"></div>
+  <div class="ProfileCanvas"></div>
 </template>
 
 

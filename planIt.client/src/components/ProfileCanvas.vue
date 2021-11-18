@@ -149,13 +149,13 @@ export default {
   object-fit: cover;
 }
 .background {
-  background: rgb(0, 148, 62);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 148, 62, 1) 20%,
-    rgb(255, 255, 255) 100%
-  );
-  // background: rgb(200, 200, 200) !important;
+  // background: rgb(0, 148, 62);
+  // background: linear-gradient(
+  //   180deg,
+  //   rgba(0, 148, 62, 1) 20%,
+  //   rgb(255, 255, 255) 100%
+  // );
+  background: rgb(200, 200, 200) !important;
 }
 .projstrip {
   background-color: rgb(116, 116, 116);

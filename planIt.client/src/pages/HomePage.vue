@@ -160,7 +160,7 @@ export default {
     background-repeat: no-repeat;
     background-position: 100%;
   }
-  @media only screen and (min-width: 1600px) {
+  @media only screen and (max-width: 1600px) {
     .backwhite {
       background-image: url("../assets/img/ExtraLarge.png");
       background-size: fill;

@@ -64,7 +64,11 @@
               </div>
             </div>
             <div class="d-flex">
-              <p>{{ tasks.filter((t) => t.isComplete) }}/{{ tasks.length }}</p>
+              <p>
+                {{
+                  tasks.length === [] ? tasks.filter((t) => t.isComplete) : "0"
+                }}/{{ tasks.length }}
+              </p>
               <i
                 @click="removeSprint"
                 class="mdi mdi-close selectable1 text-danger ms-1"

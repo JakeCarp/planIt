@@ -6,7 +6,7 @@
           <div class="mt-3 mb-3">
             <h1 class="codefont fw-bold">Welcome to</h1>
           </div>
-          <div class="text-center">
+          <div class="text-center animate__animated animate__jackInTheBox">
             <img src="../assets/img/villainism.png" width="500" alt="" />
           </div>
           <div class="mt-3 mb-3 text-center">

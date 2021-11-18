@@ -65,9 +65,9 @@
             </div>
             <div class="d-flex">
               <p>
-                {{
-                  tasks.length === [] ? tasks.filter((t) => t.isComplete) : "0"
-                }}/{{ tasks.length }}
+                {{ tasks.filter((t) => t.isComplete).length }}/{{
+                  tasks.length
+                }}
               </p>
               <i
                 @click="removeSprint"

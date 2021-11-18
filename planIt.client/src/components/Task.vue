@@ -35,19 +35,7 @@ export default {
     }
   },
   setup(props) {
-    const taskData = ({})
     return {
-      taskData,
-      timeAgo(time) {
-        logger.log(time)
-        if (!time) {
-          const date = new Date()
-          taskData.completedOn = date
-          return momentService.timeAgo(date)
-        }
-        let timeAgo = momentService.timeAgo(time)
-        return timeAgo
-      },
       notes: computed(() => AppState.notes.filter(n => n.taskId === props.task.id))
     }
   }

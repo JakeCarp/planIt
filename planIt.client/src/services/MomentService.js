@@ -3,7 +3,7 @@ import { logger } from '../utils/Logger'
 
 class MomentService {
     timeAgo(time ) {
-        const timeAgo = moment(time).fromNow(true)
+        const timeAgo = moment(time).fromNow()
         return timeAgo
 }
 }

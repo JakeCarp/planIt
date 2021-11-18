@@ -1,21 +1,36 @@
 <template>
   <div class="projectsPage container-fluid bg-img">
     <div class="row justify-content-center flex">
-      <div class="col-11 align-self-center">
+      <div class="col-md-11 align-self-center">
         <div class="row">
-          <div class="card spec border-5 p-4 size">
-            <div class="d-flex">
+          <div
+            class="
+              card
+              spec
+              border-5
+              p-4
+              size
+              animate__animated animate__fadeIn
+            "
+          >
+            <img
+              class="hahaha"
+              height="340"
+              src="../assets/img/-11599422086x4tmudffg5-removebg-preview.png"
+              alt=""
+            />
+            <div class="d-flex mobilecolumn">
               <div class="margproj">
                 <project :project="project" />
               </div>
-              <div class="wid"></div>
-              <div class="align-self-center">
+              <div class="wid disapearmobile"></div>
+              <div class="align-self-center margmobile me-5">
                 <img
                   @click="addSprintBtn = !addSprintBtn"
                   v-if="addSprintBtn === true"
                   class="grow"
                   src="../assets/img/scheme.png"
-                  height="120"
+                  height="140"
                   alt=""
                 />
                 <div v-else class="d-flex">
@@ -29,13 +44,13 @@
                       v-model="sprintName.name"
                     />
                     <i
-                      class="mdi mdi-check colorcheck mdi-18px selectable"
+                      class="mdi mdi-check colorcheck mdi-24px selectable"
                       @click="createSprint"
                     ></i>
                   </form>
                   <i
                     @click="addSprintBtn = !addSprintBtn"
-                    class="mdi mdi-close selectable1 text-danger ms-1"
+                    class="mdi mdi-24px mdi-close selectable1 text-danger ms-1"
                   ></i>
                 </div>
               </div>
@@ -43,13 +58,24 @@
             <div>
               <div class="accordion" id="accordionExample"></div>
             </div>
-            <div class="scroll">
-              <Sprint
-                v-for="(s, index) in sprints"
-                :key="s.id"
-                :sprint="s"
-                :index="index"
-              />
+            <div
+              class="
+                mt-4
+                scroll
+                sizescheme
+                d-flex
+                flex-column
+                align-self-center align-items-center
+              "
+            >
+              <div class="align-self-center sprints">
+                <Sprint
+                  v-for="(s, index) in sprints"
+                  :key="s.id"
+                  :sprint="s"
+                  :index="index"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -108,6 +134,16 @@ export default {
 
 
 <style lang="scss" scoped>
+.sizescheme {
+  width: 85%;
+}
+.hahaha {
+  position: absolute;
+  z-index: -1;
+  bottom: 5px;
+  opacity: 0.8;
+  left: 0;
+}
 .flex {
   height: 89vh;
 }
@@ -159,5 +195,27 @@ export default {
 .scroll::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+.sprints {
+  width: 100%;
+}
+@media only screen and (max-width: 500px) {
+  .justi {
+    justify-content: center;
+    flex-direction: column;
+  }
+  .mobilecolumn {
+    flex-direction: column;
+  }
+  .margmobile {
+    margin: 0;
+    justify-content: center;
+  }
+  .disapearmobile {
+    display: none;
+  }
+  .margproj {
+    margin-left: 0;
+  }
 }
 </style>

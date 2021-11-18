@@ -11,7 +11,7 @@
             aria-controls="collapseOne"
           >
             <div class="codefont mx-3 mt-1 d-flex align-items-center">
-              <h5>
+              <h5 class="p-1">
                 {{ sprint.name.toUpperCase() }}
               </h5>
             </div>
@@ -46,7 +46,7 @@
                     class="codefont weightsize me-1"
                     type="number"
                     required
-                    placeholder="1"
+                    placeholder=""
                     min="1"
                     max="50"
                     name="weight"
@@ -63,15 +63,16 @@
                 </form>
               </div>
             </div>
-            <div class="d-flex">
-              <p>
+            <div class="d-flex align-items-center ms-5">
+              <p class="m-0 mb-1">
+                Tasks Completed
                 {{ tasks.filter((t) => t.isComplete).length }}/{{
                   tasks.length
                 }}
               </p>
               <i
                 @click="removeSprint"
-                class="mdi mdi-close selectable1 text-danger ms-1"
+                class="mdi mdi-18px mdi-close selectable1 text-danger ms-1"
               ></i>
             </div>
           </div>

@@ -5,7 +5,7 @@
   <main class="background">
     <router-view />
   </main>
-  <footer></footer>
+  <footer><ProjectFormModal /></footer>
 </template>
 
 <script>

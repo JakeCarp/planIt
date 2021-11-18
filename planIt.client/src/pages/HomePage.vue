@@ -40,20 +40,44 @@
             <div>
               <div class="scroll container">
                 <div
-                  class="
-                    card
-                    projstrip
-                    grow2
-                    mt-3
-                    elevation-3
-                    selectable1
-                    border-0
-                  "
+                  class="d-flex align-items-center"
                   v-for="proj in projects"
                   :key="proj.id"
-                  @click="routeTo(proj.id)"
                 >
-                  <h4 class="p-2 m-0 ms-2 spacing">{{ proj.name }}</h4>
+                  <div
+                    class="
+                      scard
+                      card
+                      projstrip
+                      grow2
+                      mt-3
+                      elevation-3
+                      selectable1
+                      border-0
+                    "
+                    @click="routeTo(proj.id)"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <h4 class="p-2 m-0 ms-2 spacing">{{ proj.name }}</h4>
+                    </div>
+                  </div>
+                  <i
+                    @click="removeProject(proj.id)"
+                    class="
+                      ms-3
+                      mt-3
+                      mdi mdi-trash-can
+                      text-white
+                      selectable1
+                      me-3
+                      px-1
+                      border border-0 border-dark
+                      rounded
+                      bg-danger
+                    "
+                  ></i>
                 </div>
               </div>
             </div>
@@ -94,6 +118,18 @@ export default {
           logger.error(error)
           Pop.toast(error.message, 'error')
         }
+      },
+      async removeProject(id) {
+        try {
+          if (await Pop.confirm()) {
+            await projectsService.removeProject(id)
+            Pop.toast('Project Removed', 'success')
+          }
+          router.push({ name: 'Home' })
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
       }
     }
 
@@ -107,6 +143,9 @@ export default {
   background-size: fill;
   background-repeat: no-repeat;
   background-position: 100%;
+}
+.scard {
+  width: 100%;
 }
 .size {
   height: 89vh;
@@ -161,13 +200,13 @@ export default {
     background-repeat: no-repeat;
     background-position: 100%;
   }
-  @media only screen and (max-width: 1600px) {
-    .backwhite {
-      background-image: url("../assets/img/ExtraLarge.png");
-      background-size: fill;
-      background-repeat: no-repeat;
-      background-position: 100%;
-    }
-  }
+  // @media only screen and (max-width: 1600px) {
+  //   .backwhite {
+  //     background-image: url("../assets/img/ExtraLarge.png");
+  //     background-size: fill;
+  //     background-repeat: no-repeat;
+  //     background-position: 100%;
+  //   }
+  // }
 }
 </style>

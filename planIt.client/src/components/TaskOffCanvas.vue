@@ -126,6 +126,6 @@ export default {
 
 <style lang="scss" scoped>
 .background {
-  background: rgb(200, 200, 200) !important;
+  background: rgb(255, 255, 255) !important;
 }
 </style>

@@ -87,20 +87,18 @@
         </div>
         <div>
           <div class="card projects border border-3 scroll container">
+            <h3 class="my-2">Plots:</h3>
             <div
               class="card projstrip grow2 mt-3 elevation-3 selectable1 border-0"
               v-for="proj in projects"
               :key="proj.id"
               @click="routeTo(proj.id)"
             >
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-center">
                 <div>
                   <h6 class="p-2 m-0 ms-2 spacing textcontent">
                     {{ proj.name }}
                   </h6>
-                </div>
-                <div>
-                  <h6 class="p-2 m-0 ms-2 spacing">Started At here</h6>
                 </div>
               </div>
             </div>
@@ -118,10 +116,12 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { accountService } from "../services/AccountService"
+import { useRouter } from "vue-router"
 export default {
   setup() {
     let edit = ref(true)
     let editProfile = ref({})
+    const router = useRouter()
 
     return {
       editProfile,
@@ -136,7 +136,11 @@ export default {
           logger.log(error)
           Pop.toast(error.message, 'error')
         }
-      }
+      },
+      routeTo(id) {
+        logger.log(id)
+        router.push({ name: 'Project', params: { projectId: id } })
+      },
     }
   }
 }
@@ -155,7 +159,7 @@ export default {
   //   rgba(0, 148, 62, 1) 20%,
   //   rgb(255, 255, 255) 100%
   // );
-  background: rgb(200, 200, 200) !important;
+  background: rgb(255, 255, 255) !important;
 }
 .projstrip {
   background-color: rgb(116, 116, 116);

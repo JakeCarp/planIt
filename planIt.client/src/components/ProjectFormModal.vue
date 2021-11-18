@@ -65,6 +65,8 @@ import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { projectsService } from "../services/ProjectsService"
 import { watchEffect } from '@vue/runtime-core'
+import { useRoute, useRouter } from "vue-router"
+import { AppState } from "../AppState"
 export default {
   props: {
     project: {
@@ -77,19 +79,23 @@ export default {
     watchEffect(() => {
       projectData.value = { ...props.project }
     });
+    const router = useRouter()
     return {
+      router,
       projectData,
       async handleSubmit() {
         try {
           if (projectData.value.id) {
             await projectsService.editProject(projectData.value)
-            Pop.toast('Scheme Edited', 'success')
+            Pop.toast('Plot Edited', 'success')
           } else {
             await projectsService.createProject(projectData.value)
-            Pop.toast('Scheme Created', 'success')
+            Pop.toast('Plot Created', 'success')
             projectData.value = {}
+            router.push({ name: 'Project', params: { projectId: AppState.projects[0].id } })
+
           }
-          const modelElem = document.getElementById('projModal')
+          const modelElem = document.getElementById('aundefineda')
           Modal.getOrCreateInstance(modelElem).toggle()
 
         } catch (error) {
@@ -104,5 +110,11 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss" >
+.modal-backdrop.fade {
+  display: none !important;
+}
+.modal-content {
+  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.445);
+}
 </style>

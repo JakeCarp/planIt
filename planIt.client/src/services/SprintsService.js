@@ -28,7 +28,7 @@ let updated = res.data
 let index = AppState.sprints.findIndex( p => p.id === updated.id)
 AppState.sprints.splice(index, 1, updated)
 }
-async removeProject(projectId, id){
+async removeSprint(projectId, id){
   const res = await api.delete('api/projects/' + projectId + '/sprints/'+id)
   logger.log('REMOVE SPRINT', res.data)
   AppState.sprints.filter( s => s.id !== id)

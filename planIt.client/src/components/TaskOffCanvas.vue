@@ -79,6 +79,7 @@ import { logger } from '../utils/Logger'
 import { momentService } from '../services/MomentService'
 import Pop from '../utils/Pop'
 import { watchEffect } from '@vue/runtime-core'
+import { notesService } from '../services/NotesService'
 export default {
   props: {
     task: {
@@ -125,11 +126,6 @@ export default {
 
 <style lang="scss" scoped>
 .background {
-  background: rgb(0, 148, 62);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 148, 62, 1) 20%,
-    rgb(255, 255, 255) 100%
-  );
+  background: rgb(200, 200, 200) !important;
 }
 </style>

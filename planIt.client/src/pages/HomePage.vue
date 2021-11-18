@@ -19,7 +19,7 @@
               <div class="align-self-end">
                 <img
                   data-bs-toggle="modal"
-                  data-bs-target="#projModal"
+                  data-bs-target="#aundefineda"
                   class="grow selectable1"
                   src="../assets/img/newplot.png"
                   height="130"
@@ -88,6 +88,7 @@ export default {
         try {
           await projectsService.createProject(newProjectData.value)
           Pop.toast('Project Created', 'success')
+          newProjectData = {}
 
         } catch (error) {
           logger.error(error)

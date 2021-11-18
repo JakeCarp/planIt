@@ -2,7 +2,7 @@
   <div class="projectFormModal">
     <!-- Modal -->
     <div
-      id="projModal"
+      :id="'a' + projectData.id + 'a'"
       class="modal fade"
       tabindex="-1"
       role="dialog"
@@ -87,6 +87,7 @@ export default {
           } else {
             await projectsService.createProject(projectData.value)
             Pop.toast('Scheme Created', 'success')
+            projectData.value = {}
           }
           const modelElem = document.getElementById('projModal')
           Modal.getOrCreateInstance(modelElem).toggle()

@@ -20,7 +20,7 @@
               alt=""
             />
             <div class="d-flex mobilecolumn">
-              <div class="margproj">
+              <div>
                 <project :project="project" />
               </div>
               <div class="wid disapearmobile"></div>
@@ -68,7 +68,7 @@
                 align-self-center align-items-center
               "
             >
-              <div class="align-self-center sprints">
+              <div class="align-self-center sprints" v-if="sprints.length > 0">
                 <Sprint
                   v-for="(s, index) in sprints"
                   :key="s.id"
@@ -76,6 +76,7 @@
                   :index="index"
                 />
               </div>
+              <h3 class="codefont" v-else>Please Add A Scheme</h3>
             </div>
           </div>
         </div>
@@ -121,7 +122,7 @@ export default {
           addSprintBtn.value = true;
           await sprintsService.createSprint(route.params.projectId, sprintName.value)
           sprintName.value = {}
-          Pop.toast('Phase Created', 'success')
+          Pop.toast('Scheme Plotted', 'success')
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
@@ -171,9 +172,7 @@ export default {
 .wid {
   width: 40%;
 }
-.margproj {
-  margin-left: 10%;
-}
+
 .codefont {
   font-family: "Fira Code", monospace;
 }

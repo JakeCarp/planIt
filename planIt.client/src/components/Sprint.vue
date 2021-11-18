@@ -15,16 +15,19 @@
                 {{ sprint.name.toUpperCase() }}
               </h5>
             </div>
-            <i
-              v-if="sprint.isOpen"
-              class="mdi mdi-cookie align-self-center"
-            ></i>
           </div>
+          <i
+            v-if="sprint.isOpen"
+            class="mdi mdi-account-group mdi-18px align-self-center"
+            title="Total Goons Needed"
+          >
+            <span class="ms-2 codefont"> {{ countTotalWeight(tasks) }} </span>
+          </i>
 
           <div class="d-flex">
             <div class="d-flex justify-content-center">
               <button
-                class="codefont me-5"
+                class="codefont me-5 btn btn-outline-dark rounded-0"
                 @click="addTaskBtn = !addTaskBtn"
                 v-if="addTaskBtn === true"
               >
@@ -53,7 +56,7 @@
                     v-model="taskData.weight"
                   />
                   <i
-                    class="mdi mdi-check colorcheck mdi-18px me-2"
+                    class="mdi mdi-check colorcheck mdi-18px me-2 selectable1"
                     @click="createTask"
                   ></i>
                   <i
@@ -63,33 +66,40 @@
                 </form>
               </div>
             </div>
-            <div class="d-flex align-items-center ms-5">
+            <div class="d-flex align-items-center ms-5 pe-3">
               <p class="m-0 mb-1">
                 Tasks Completed
                 {{ tasks.filter((t) => t.isComplete).length }}/{{
                   tasks.length
                 }}
               </p>
-              <i
-                @click="removeSprint"
-                class="mdi mdi-18px mdi-close selectable1 text-danger ms-1"
-              ></i>
             </div>
           </div>
         </div>
       </div>
       <div
+        v-if="tasks.length > 0"
         :id="'a' + sprint.id + 'a'"
-        :class="
-          index === 0
-            ? 'accordion collapsestyle'
-            : 'accordion collapse collapsestyle'
-        "
+        class="accordion collapse collapsestyle"
         aria-labelledby=""
         data-bs-parent="#accordionExample"
       >
         <div class="accordion-body bg-info scroll">
           <Task v-for="t in tasks" :key="t.id" :task="t" />
+          <div class="text-end">
+            <i
+              @click="removeSprint"
+              class="
+                mdi mdi-18px mdi-trash-can
+                selectable1
+                text-danger
+                ms-1
+                text-end
+              "
+            >
+              Delete Scheme</i
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -104,6 +114,7 @@ import Pop from '../utils/Pop'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
+import { sprintsService } from '../services/SprintsService'
 
 export default {
   props: {
@@ -131,8 +142,23 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
+      countTotalWeight(tasks) {
+        let total = 0
+        tasks.forEach(t => {
+          total += t.weight
+        });
+        return total
+      },
       async removeSprint() {
-
+        try {
+          if (await Pop.confirm()) {
+            await sprintsService.removeSprint(route.params.projectId, props.sprint.id)
+            Pop.toast('Deleted Scheme')
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
       }
     }
   }
@@ -142,7 +168,8 @@ export default {
 
 <style lang="scss" scoped>
 .scroll {
-  height: 28vh;
+  height: auto;
+  max-height: 28vh;
   overflow-y: scroll;
 }
 .accordion-button {

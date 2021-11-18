@@ -2,28 +2,43 @@
   <div class="row">
     <div class="d-flex justi">
       <h1 class="codefont fontbig">{{ project.name }}</h1>
-      <div class="d-flex justirow">
-        <i
-          data-bs-toggle="modal"
-          data-bs-target="#projModal"
-          title="Edit Plot"
-          class="mdi mdi-24px mdi-pencil ms-4 coloredit selectable1"
-        ></i>
-        <i
-          @click="removeProject"
-          title="Remove Plot"
-          class="mdi mdi-24px mdi-close selectable1 text-danger ms-1"
-        ></i>
+      <div class="dropdown ms-3">
+        <button
+          id="dropDownMenu"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          class="dropdown-toggle btn btn-outline-primary"
+        >
+          <i class="mdi mdi-menu"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-item">
+            <i
+              data-bs-toggle="modal"
+              :data-bs-target="'#a' + project.id + 'a'"
+              title="Edit Plot"
+              class="mdi mdi-24px mdi-pencil coloredit selectable1"
+            >
+              Edit</i
+            >
+          </li>
+          <li class="dropdown-item">
+            <i
+              @click="removeProject"
+              title="Remove Plot"
+              class="mdi mdi-24px mdi-trash-can selectable1 text-danger"
+            >
+              Delete</i
+            >
+          </li>
+        </ul>
       </div>
     </div>
     <div>
       <p class="codefont fontmedium">{{ project.description }}</p>
     </div>
-
-    <projectFormModal :project="project" />
-    <div class="my-3"></div>
-    <div></div>
   </div>
+  <projectFormModal :project="project" />
 </template>
 
 <script>
@@ -39,8 +54,10 @@ export default {
       router,
       async removeProject() {
         try {
-          await projectsService.removeProject(props.project.id)
-          Pop.toast('Project Removed', 'success')
+          if (await Pop.confirm()) {
+            await projectsService.removeProject(props.project.id)
+            Pop.toast('Project Removed', 'success')
+          }
           router.push({ name: 'Home' })
         } catch (error) {
           logger.error(error)

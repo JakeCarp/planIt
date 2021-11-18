@@ -12,7 +12,7 @@
           >
             <div class="codefont mx-3 mt-1 d-flex align-items-center">
               <h5 class="p-1">
-                {{ sprint.name.toUpperCase() }}
+                {{ sprint.name }}
               </h5>
             </div>
           </div>
@@ -115,6 +115,7 @@ import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
 import { sprintsService } from '../services/SprintsService'
+import { Collapse, Dropdown } from 'bootstrap'
 
 export default {
   props: {
@@ -127,9 +128,9 @@ export default {
     let addTaskBtn = ref(true)
     logger.log(taskData)
     return {
+      taskData,
       addTaskBtn,
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId === props.sprint.id)),
-      taskData,
       async createTask() {
         try {
           addTaskBtn.value = true;
@@ -140,6 +141,14 @@ export default {
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
+        }
+      },
+      async moveTask() {
+        try {
+          logger.log('editing task')
+        } catch (err) {
+          logger.error(err)
+          Pop.toast(err.message, 'error')
         }
       },
       countTotalWeight(tasks) {

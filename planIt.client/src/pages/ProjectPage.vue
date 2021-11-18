@@ -19,7 +19,7 @@
               src="../assets/img/-11599422086x4tmudffg5-removebg-preview.png"
               alt=""
             />
-            <div class="d-flex mobilecolumn">
+            <div class="d-flex mobilecolumn mx-5 justify-content-center">
               <div>
                 <project :project="project" />
               </div>
@@ -43,15 +43,22 @@
                       name="title"
                       v-model="sprintName.name"
                     />
-                    <i
-                      class="mdi mdi-check colorcheck mdi-24px selectable"
-                      @click="createSprint"
-                    ></i>
+                    <div class="div">
+                      <i
+                        class="mdi mdi-check colorcheck mdi-24px selectable"
+                        @click="createSprint"
+                      ></i>
+                      <i
+                        @click="addSprintBtn = !addSprintBtn"
+                        class="
+                          mdi mdi-24px mdi-close
+                          selectable1
+                          text-danger
+                          ms-1
+                        "
+                      ></i>
+                    </div>
                   </form>
-                  <i
-                    @click="addSprintBtn = !addSprintBtn"
-                    class="mdi mdi-24px mdi-close selectable1 text-danger ms-1"
-                  ></i>
                 </div>
               </div>
             </div>
@@ -95,6 +102,7 @@ import { sprintsService } from "../services/SprintsService"
 import { AppState } from "../AppState"
 import { projectsService } from '../services/ProjectsService'
 import { tasksService } from '../services/TasksService'
+import { notesService } from '../services/NotesService'
 export default {
   setup() {
     const sprintName = ref({})
@@ -105,6 +113,7 @@ export default {
         await projectsService.getById(route.params.projectId)
         await sprintsService.getAll(route.params.projectId)
         await tasksService.getAll(route.params.projectId)
+        await notesService.getAll(route.params.projectId)
       }
       catch (error) {
         logger.error(error)
@@ -170,7 +179,7 @@ export default {
   transform: scale(1.3);
 }
 .wid {
-  width: 40%;
+  width: 30%;
 }
 
 .codefont {

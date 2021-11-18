@@ -1,12 +1,12 @@
 <template>
   <div class="landing container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-7 mt-5">
+    <div class="row justify-content-center align-items-center height100">
+      <div class="col-7">
         <div class="card spec border-5 p-4 size d-flex">
           <div class="mt-3 mb-3">
-            <h1 class="codefont fw-bold">Welcome to</h1>
+            <h1 class="codefont text-center fw-bold">Welcome to</h1>
           </div>
-          <div class="text-center">
+          <div class="text-center animate__animated animate__jackInTheBox">
             <img src="../assets/img/villainism.png" width="500" alt="" />
           </div>
           <div class="mt-3 mb-3 text-center">
@@ -25,7 +25,7 @@
                 px-2
                 pb-2
                 me-4
-                text-light
+                text-white
               "
             >
               Login
@@ -64,7 +64,7 @@ export default {
 <style lang="scss" scoped>
 .spec {
   border-radius: 0;
-  background-color: #7c7c7c;
+  background-color: #9c9c9c;
   border-color: #131313;
 }
 .codefont {
@@ -72,5 +72,8 @@ export default {
 }
 .size {
   height: 70vh;
+}
+.height100 {
+  height: 100vh;
 }
 </style>

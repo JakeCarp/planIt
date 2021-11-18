@@ -1,5 +1,6 @@
 <template>
   <nav
+    v-if="user.isAuthenticated"
     class="
       navbar navbar-expand-lg navbar-dark
       backbar
@@ -8,7 +9,7 @@
       border-4
       elevation-3
       d-flex
-      justify-content-between
+      justi
     "
   >
     <div
@@ -16,14 +17,15 @@
       data-bs-toggle="offcanvas"
       href="#offcanvasExample"
       role="button"
+      aria-label="Profile"
     >
       <div v-show="user.isAuthenticated" class="ms-4">
         <div class="d-flex">
           <div class="d-flex flex-column">
-            <h5 class="me-3 mb-0 text-light text-end">
+            <h5 class="me-3 mb-0 text-white text-end">
               {{ account.name }}
             </h5>
-            <p class="text-light me-3 mb-0 text-end">{{ account.email }}</p>
+            <p class="text-white me-3 mb-0 text-end">{{ account.email }}</p>
           </div>
           <img
             :src="account.picture"
@@ -53,7 +55,7 @@
         selectable
         border border-dark border-3
         fs-5
-        text-light
+        text-white
         p-1
         px-2
         pb-2
@@ -111,6 +113,9 @@ export default {
 </script>
 
 <style scoped>
+.justi {
+  justify-content: space-between;
+}
 .dropdown-menu {
   user-select: none;
   display: block;
@@ -149,5 +154,11 @@ a:hover {
 }
 .bordcolor {
   border-color: #00943e !important;
+}
+@media only screen and (max-width: 500px) {
+  .justi {
+    justify-content: center;
+    flex-direction: column;
+  }
 }
 </style>

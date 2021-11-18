@@ -5,7 +5,7 @@
   <main class="background">
     <router-view />
   </main>
-  <footer></footer>
+  <footer><ProjectFormModal /></footer>
 </template>
 
 <script>
@@ -24,6 +24,7 @@ export default {
 @import "./assets/scss/main.scss";
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap");
+
 main {
   flex-grow: 1;
 }

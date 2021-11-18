@@ -1,7 +1,15 @@
 <template>
   <div class="home container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-12 backwhite size">
+    <div
+      class="
+        justify-content-center
+        animate__animated animate__zoomInLeft
+        backwhite
+        size
+        container-fluid
+      "
+    >
+      <div class="col-12">
         <div class="row justify-content-center">
           <div class="col-7">
             <div class="d-flex topsize justify-content-between">
@@ -54,7 +62,6 @@
       </div>
     </div>
   </div>
-  <ProjectFormModal />
 </template>
 
 <script>
@@ -152,6 +159,14 @@ export default {
     background-size: fill;
     background-repeat: no-repeat;
     background-position: 100%;
+  }
+  @media only screen and (min-width: 1600px) {
+    .backwhite {
+      background-image: url("../assets/img/ExtraLarge.png");
+      background-size: fill;
+      background-repeat: no-repeat;
+      background-position: 100%;
+    }
   }
 }
 </style>

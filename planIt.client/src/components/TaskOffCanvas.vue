@@ -65,29 +65,52 @@
       <div class="d-flex justify-content-start mt-3">
         <h5>Add a Note:</h5>
       </div>
-      <div class="mt-3 input-group d-flex flex-row justify-content-center">
+      <div class="mt-3 mb-3 input-group d-flex flex-row justify-content-center">
         <textarea
           v-model="noteData"
           rows="2"
-          cols="40"
+          cols="35"
           maxlength="50"
         ></textarea>
         <span @click="createNote" class="input-group-text bg-dark"
           ><i class="mdi mdi-send"></i
         ></span>
       </div>
-      <div class="col-12 scroll">
+      <div class="col-12 scroll d-flex flex-column">
         <div v-for="n in notes" :key="n.id" class="note">
-          <div
-            v-if="n.creatorId === account.id"
-            class="left-bubble bg-dark d-flex mt-3 rounded justify-content-end"
-          >
-            <div class="ps-5 pt-1 mt-2 ms-3">
-              <p class="m-0 text-white">{{ n.body }}</p>
+          <div v-if="n.creatorId === account.id" class="d-flex ms-3">
+            <div
+              class="right-bubble bg-dark d-flex justify-content-end rounded"
+            >
+              <div class="me-2">
+                <p class="ps-2 mt-1 m-0 me-5 text-white">{{ n.body }}</p>
+              </div>
+            </div>
+            <div>
+              <img
+                :src="account.picture"
+                alt="user photo"
+                height="40"
+                width="40"
+                class="picrounded elevation-3"
+              />
             </div>
           </div>
-          <div v-else class="right-bubble bg-dark">
-            <p class="m-0 text-white">{{ n.body }}</p>
+          <div v-else class="d-flex flex-row">
+            <div class="w-100 d-flex align-self-end">
+              <div>
+                <img
+                  :src="n.creator.picture"
+                  alt="user photo"
+                  height="40"
+                  width="40"
+                  class="picrounded elevation-3"
+                />
+              </div>
+              <div class="left-bubble rounded bg-dark">
+                <p class="m-0 text-white">{{ n.body }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -167,14 +190,18 @@ export default {
 
 
 <style lang="scss" scoped>
+.picrounded {
+  border-radius: 50%;
+  object-fit: cover;
+}
 .scroll {
   height: auto;
-  max-height: 55vh;
+  max-height: 47vh;
   overflow-y: scroll;
 }
 .left-bubble {
   width: 80%;
-  min-height: 10vh;
+  min-height: 13vh;
   clip-path: polygon(
     27% 0,
     100% 0%,
@@ -188,7 +215,7 @@ export default {
 .right-bubble {
   clip-path: polygon(0% 0%, 100% 0, 83% 13%, 83% 44%, 83% 75%, 50% 75%, 0% 75%);
   width: 80%;
-  min-height: 10vh;
+  min-height: 13vh;
 }
 .no-select {
   pointer-events: none;

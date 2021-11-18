@@ -58,10 +58,15 @@
         <h5>Add a Note:</h5>
       </div>
       <div class="mt-3 input-group d-flex justify-content-center">
-        <textarea v-model="noteData.body" rows="2" cols="40"></textarea>
-        <span class="input-group-text bg-primary"
+        <textarea v-model="noteData" rows="2" cols="40"></textarea>
+        <span @click="createNote" class="input-group-text bg-primary"
           ><i class="mdi mdi-send"></i
         ></span>
+      </div>
+      <div class="col-12">
+        <!-- <div v-for="n in notes" :key="n.id" class="note">
+          {{ n.body }}
+        </div> -->
       </div>
     </div>
   </div>
@@ -72,6 +77,8 @@
 import { ref } from '@vue/reactivity'
 import { logger } from '../utils/Logger'
 import { momentService } from '../services/MomentService'
+import Pop from '../utils/Pop'
+import { watchEffect } from '@vue/runtime-core'
 export default {
   props: {
     task: {
@@ -84,11 +91,22 @@ export default {
     }
   },
   setup(props) {
-    const noteData = ref({})
+    const noteData = ref('')
     const taskData = ref({})
+    watchEffect(() => {
+      taskData.value = { ...props.task };
+    });
     return {
       noteData,
       taskData,
+      async createNote() {
+        try {
+          await notesService.createNote({ body: noteData.value, taskId: taskData.value.id })
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
       timeAgo(time) {
         logger.log("[CREATED]", time)
         if (!time) {

@@ -80,13 +80,13 @@
         <div v-for="n in notes" :key="n.id" class="note">
           <div
             v-if="n.creatorId === account.id"
-            class="left-bubble bg-dark d-flex mt-3 rounded"
+            class="left-bubble bg-dark d-flex mt-3 rounded justify-content-end"
           >
             <div class="ps-5 pt-1 mt-2 ms-3">
               <p class="m-0 text-white">{{ n.body }}</p>
             </div>
           </div>
-          <div v-else class="right-bubble bg-secondary justify-content-end">
+          <div v-else class="right-bubble bg-dark">
             <p class="m-0 text-white">{{ n.body }}</p>
           </div>
         </div>
@@ -186,18 +186,9 @@ export default {
   );
 }
 .right-bubble {
-  width: 75%;
-  min-height: 5vh;
-  height: auto;
-  clip-path: polygon(
-    27% 0,
-    100% 0%,
-    100% 73%,
-    20% 73%,
-    20% 37%,
-    20% 20%,
-    10% 0
-  );
+  clip-path: polygon(0% 0%, 100% 0, 83% 13%, 83% 44%, 83% 75%, 50% 75%, 0% 75%);
+  width: 80%;
+  min-height: 10vh;
 }
 .no-select {
   pointer-events: none;

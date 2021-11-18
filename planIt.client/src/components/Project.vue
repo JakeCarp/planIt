@@ -95,7 +95,7 @@ export default {
   font-size: 3vh;
 }
 .coloredit {
-  color: rgb(65, 177, 51);
+  color: rgb(43, 122, 33);
 }
 @media only screen and (max-width: 500px) {
   .justi {

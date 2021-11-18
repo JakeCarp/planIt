@@ -162,8 +162,8 @@ export default {
   background: rgb(255, 255, 255) !important;
 }
 .projstrip {
-  background-color: rgb(116, 116, 116);
-  color: rgb(255, 255, 255);
+  background-color: rgb(209, 207, 207);
+  color: rgb(32, 32, 32);
 }
 .textcontent {
   max-width: 25vh;

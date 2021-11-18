@@ -170,8 +170,8 @@ export default {
   transform: scale(1.02);
 }
 .projstrip {
-  background-color: rgb(148, 148, 148);
-  color: rgb(255, 255, 255);
+  background-color: rgb(209, 207, 207);
+  color: rgb(32, 32, 32);
   font-family: "Bangers", cursive;
   letter-spacing: 1.5px;
 }

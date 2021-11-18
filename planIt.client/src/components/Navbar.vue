@@ -22,10 +22,10 @@
       <div v-show="user.isAuthenticated" class="ms-4">
         <div class="d-flex">
           <div class="d-flex flex-column">
-            <h5 class="me-3 mb-0 text-white text-end nav-text">
+            <h5 class="me-3 mb-0 text-white text-end">
               {{ account.name }}
             </h5>
-            <p class="text-white me-3 mb-0 text-end nav-text">
+            <p class="text-white me-3 mb-0 text-end">
               {{ account.email }}
             </p>
           </div>
@@ -53,7 +53,6 @@
       v-if="user.isAuthenticated"
       @click="logout"
       class="
-        nav-text
         mdi-18px
         selectable
         border border-dark border-3
@@ -81,7 +80,6 @@
           pb-2
           me-4
           text-light
-          nav-text
         "
       >
         Login
@@ -144,7 +142,7 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 .backbar {
-  background-color: #00943e;
+  background-color: #028338;
 }
 .border1 {
   border-top: 0 !important;
@@ -164,8 +162,5 @@ a:hover {
     justify-content: center;
     flex-direction: column;
   }
-}
-.nav-text {
-  text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
 }
 </style>

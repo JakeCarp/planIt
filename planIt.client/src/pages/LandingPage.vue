@@ -25,7 +25,7 @@
                 px-2
                 pb-2
                 me-4
-                text-white
+                text-dark
               "
             >
               Login

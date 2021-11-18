@@ -21,6 +21,7 @@
         >
           <i
             @click="edit = !edit"
+            aria-label="edit profile"
             class="mdi mdi-pencil selectable1 align-self-end"
             >Edit Profile</i
           >

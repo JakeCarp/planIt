@@ -4,6 +4,7 @@
       <h1 class="codefont fontbig">{{ project.name }}</h1>
       <div class="dropdown ms-3">
         <button
+          aria-label="dropdown button"
           v-if="project.creatorId === account.id"
           id="dropDownMenu"
           data-bs-toggle="dropdown"

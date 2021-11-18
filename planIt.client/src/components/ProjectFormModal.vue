@@ -89,7 +89,7 @@ export default {
             Pop.toast('Scheme Created', 'success')
             projectData.value = {}
           }
-          const modelElem = document.getElementById('projModal')
+          const modelElem = document.getElementById('aundefineda')
           Modal.getOrCreateInstance(modelElem).toggle()
 
         } catch (error) {

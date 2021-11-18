@@ -11,9 +11,9 @@
             aria-controls="collapseOne"
           >
             <div class="codefont mx-3 mt-1 d-flex align-items-center">
-              <h5 class="p-1">
+              <p class="p-1 f-16 m-0">
                 {{ sprint.name }}
-              </h5>
+              </p>
             </div>
           </div>
           <i
@@ -27,6 +27,7 @@
           <div class="d-flex">
             <div class="d-flex justify-content-center">
               <button
+                aria-label="add a task"
                 class="codefont me-5 btn btn-outline-dark rounded-0"
                 @click="addTaskBtn = !addTaskBtn"
                 v-if="addTaskBtn === true"

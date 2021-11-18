@@ -48,7 +48,11 @@
         v-if="task.creatorId === account.id"
         class="d-flex justify-content-center align-items-center"
       >
-        <button class="btn btn-outline-danger" @click="removeTask">
+        <button
+          aria-label="delete task"
+          class="btn btn-outline-danger"
+          @click="removeTask"
+        >
           Delete Task
         </button>
       </div>
@@ -92,6 +96,8 @@
         </div>
       </div>
     </div>
+    <!-- TODO this is a working delete button for the notes -->
+    <!-- <i class="mdi mdi-trash-can selectable" @click="removeNote(n.id)"></i> -->
   </div>
 </template>
 
@@ -101,7 +107,7 @@ import { computed, ref } from '@vue/reactivity'
 import { logger } from '../utils/Logger'
 import { momentService } from '../services/MomentService'
 import Pop from '../utils/Pop'
-import { watchEffect } from '@vue/runtime-core'
+import { onMounted, watchEffect } from '@vue/runtime-core'
 import { notesService } from '../services/NotesService'
 import { useRoute } from 'vue-router'
 import { tasksService } from '../services/TasksService'
@@ -136,6 +142,16 @@ export default {
           noteData.value = ''
         } catch (error) {
           logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async removeNote(id) {
+        try {
+          if (await Pop.confirm()) {
+            await notesService.remove(route.params.projectId, id)
+          }
+        } catch (error) {
+          logger.log(error)
           Pop.toast(error.message, 'error')
         }
       },

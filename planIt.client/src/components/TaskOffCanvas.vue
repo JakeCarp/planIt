@@ -86,7 +86,7 @@
               <p class="m-0 text-white">{{ n.body }}</p>
             </div>
           </div>
-          <div v-else class="right-bubble bg-secondary">
+          <div v-else class="right-bubble bg-secondary justify-content-end">
             <p class="m-0 text-white">{{ n.body }}</p>
           </div>
         </div>
@@ -186,8 +186,6 @@ export default {
   );
 }
 .right-bubble {
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
   width: 75%;
   min-height: 5vh;
   height: auto;

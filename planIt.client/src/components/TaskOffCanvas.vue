@@ -65,7 +65,7 @@
       <div class="d-flex justify-content-start mt-3">
         <h5>Add a Note:</h5>
       </div>
-      <div class="mt-3 input-group d-flex justify-content-center">
+      <div class="mt-3 input-group d-flex flex-row justify-content-center">
         <textarea
           v-model="noteData"
           rows="2"

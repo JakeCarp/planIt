@@ -44,7 +44,10 @@
       <div class="d-flex justify-content-center align-items-center">
         <p v-if="task.isComplete">Completed: {{ timeAgo(task.completedOn) }}</p>
       </div>
-      <div class="d-flex justify-content-center align-items-center">
+      <div
+        v-if="task.creatorId === account.id"
+        class="d-flex justify-content-center align-items-center"
+      >
         <button class="btn btn-outline-danger" @click="removeTask">
           Delete Task
         </button>

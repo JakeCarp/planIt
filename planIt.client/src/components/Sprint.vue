@@ -88,6 +88,7 @@
           <Task v-for="t in tasks" :key="t.id" :task="t" />
           <div class="text-end">
             <i
+              v-if="sprint.creatorId === account.id"
               @click="removeSprint"
               class="
                 mdi mdi-18px mdi-trash-can
@@ -128,6 +129,7 @@ export default {
     let addTaskBtn = ref(true)
     logger.log(taskData)
     return {
+      account: computed(() => AppState.account),
       taskData,
       addTaskBtn,
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId === props.sprint.id)),

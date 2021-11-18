@@ -4,6 +4,7 @@
       <h1 class="codefont fontbig">{{ project.name }}</h1>
       <div class="dropdown ms-3">
         <button
+          v-if="project.creatorId === account.id"
           id="dropDownMenu"
           data-bs-toggle="dropdown"
           aria-expanded="false"
@@ -46,11 +47,14 @@ import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { projectsService } from "../services/ProjectsService"
 import { useRouter } from "vue-router"
+import { computed } from '@vue/reactivity'
+import { AppState } from '../AppState'
 export default {
   props: { project: { type: Object, required: true } },
   setup(props) {
     const router = useRouter()
     return {
+      account: computed(() => AppState.account),
       router,
       async removeProject() {
         try {

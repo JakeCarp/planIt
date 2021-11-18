@@ -64,7 +64,7 @@
     </i>
     <div v-else>
       <i
-        v-show="!user.isAuthenticated"
+        v-show="user.isAuthenticated"
         @click="login"
         class="
           mdi-18px

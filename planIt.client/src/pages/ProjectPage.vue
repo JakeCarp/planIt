@@ -95,7 +95,7 @@
 
 
 <script>
-import { computed, onMounted, ref } from "@vue/runtime-core"
+import { computed, onMounted, ref, watchEffect } from "@vue/runtime-core"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { useRoute } from "vue-router"
@@ -109,12 +109,14 @@ export default {
     const sprintName = ref({})
     const route = useRoute()
     let addSprintBtn = ref(true)
-    onMounted(async () => {
+    watchEffect(async () => {
       try {
-        await projectsService.getById(route.params.projectId)
-        await sprintsService.getAll(route.params.projectId)
-        await tasksService.getAll(route.params.projectId)
-        await notesService.getAll(route.params.projectId)
+        if (route.params.projectId) {
+          await projectsService.getById(route.params.projectId)
+          await sprintsService.getAll(route.params.projectId)
+          await tasksService.getAll(route.params.projectId)
+          await notesService.getAll(route.params.projectId)
+        }
       }
       catch (error) {
         logger.error(error)

@@ -14,15 +14,13 @@
           <i class="mdi mdi-menu"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li class="dropdown-item">
-            <i
-              data-bs-toggle="modal"
-              :data-bs-target="'#a' + project.id + 'a'"
-              title="Edit Plot"
-              class="mdi mdi-24px mdi-pencil coloredit selectable1"
-            >
-              Edit</i
-            >
+          <li
+            data-bs-toggle="modal"
+            :data-bs-target="'#a' + project.id + 'a'"
+            title="Edit Plot"
+            class="dropdown-item"
+          >
+            <i class="mdi mdi-24px mdi-pencil coloredit selectable1"> Edit</i>
           </li>
           <li class="dropdown-item">
             <i
@@ -33,6 +31,16 @@
               Delete</i
             >
           </li>
+          <!-- <li class="dropdown-item">
+            <i
+              data-bs-toggle="modal"
+              data-bs-target="#aundefineda"
+              title="Remove Plot"
+              class="mdi mdi-24px mdi-plus selectable1 text-primary"
+            >
+              New Plot</i
+            >
+          </li> -->
         </ul>
       </div>
     </div>
@@ -62,8 +70,8 @@ export default {
           if (await Pop.confirm()) {
             await projectsService.removeProject(props.project.id)
             Pop.toast('Project Removed', 'success')
+            router.push({ name: 'Home' })
           }
-          router.push({ name: 'Home' })
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

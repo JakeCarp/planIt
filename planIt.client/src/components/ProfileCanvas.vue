@@ -102,9 +102,11 @@
               "
               v-for="proj in projects"
               :key="proj.id"
-              @click="routeTo(proj.id)"
             >
-              <div class="d-flex justify-content-center">
+              <div
+                @click="routeTo(proj.id)"
+                class="d-flex justify-content-center"
+              >
                 <div>
                   <h6 class="p-2 m-0 ms-2 spacing textcontent">
                     {{ proj.name }}
@@ -126,13 +128,18 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { accountService } from "../services/AccountService"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { Offcanvas } from "bootstrap"
+import { projectsService } from "../services/ProjectsService"
+import { sprintsService } from "../services/SprintsService"
+import { tasksService } from "../services/TasksService"
+import { notesService } from "../services/NotesService"
 export default {
   setup() {
     let edit = ref(true)
     let editProfile = ref({})
     const router = useRouter()
+    const route = useRoute()
 
     return {
       router,
@@ -152,7 +159,7 @@ export default {
       routeTo(id) {
         logger.log(id)
         router.push({ name: 'Project', params: { projectId: id } })
-      },
+      }
     }
   }
 }

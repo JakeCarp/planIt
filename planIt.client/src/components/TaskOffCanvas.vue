@@ -90,7 +90,7 @@
                 <p class="ps-2 mt-1 m-0 me-5 text-white">{{ n.body }}</p>
               </div>
             </div>
-            <div>
+            <div class="d-flex flex-column align-items-center">
               <img
                 :src="account.picture"
                 alt="user photo"
@@ -98,21 +98,25 @@
                 width="40"
                 class="picrounded elevation-3"
               />
+              <p class="me-1 mt-1 fw-bold">{{ account.name }}</p>
             </div>
           </div>
-          <div v-else class="d-flex flex-row">
-            <div class="w-100 d-flex align-self-end">
-              <div>
+          <div v-else class="d-flex flex-row justify-content-end">
+            <div class="d-flex align-self-end">
+              <div class="d-flex flex-column align-items-center">
                 <img
                   :src="n.creator.picture"
                   alt="user photo"
                   height="40"
                   width="40"
-                  class="picrounded elevation-3"
+                  class="picrounded elevation-3 ms-2"
                 />
+                <p class="mt-1 fw-bold">{{ n.creator.name }}</p>
               </div>
               <div class="left-bubble rounded bg-dark">
-                <p class="m-0 text-white">{{ n.body }}</p>
+                <div class="ms-3 pt-1 pe-2">
+                  <p class="m-0 ms-5 text-white">{{ n.body }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -206,6 +210,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.widt {
+  max-width: 50vh;
+}
 .picrounded {
   border-radius: 50%;
   object-fit: cover;

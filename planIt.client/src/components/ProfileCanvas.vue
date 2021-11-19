@@ -44,9 +44,9 @@
           <form>
             <div class="d-flex flex-column mb-3 mt-4">
               <div class="input-group">
-                <span class="input-group-text">Vilain Name</span>
+                <span class="input-group-text border-dark">Vilain Name</span>
                 <input
-                  class="form-control"
+                  class="form-control border-dark"
                   type="text"
                   placeholder=""
                   name="name"
@@ -56,9 +56,9 @@
             </div>
             <div class="d-flex flex-column">
               <div class="input-group">
-                <span class="input-group-text">Picture URL</span>
+                <span class="input-group-text border-dark">Picture URL</span>
                 <input
-                  class="form-control"
+                  class="form-control border-dark"
                   type="text"
                   placeholder=""
                   name="pic-url"
@@ -90,7 +90,16 @@
           <div class="card projects border border-3 scroll container">
             <h3 class="my-2">Plots:</h3>
             <div
-              class="card projstrip grow2 mt-3 elevation-3 selectable1 border-0"
+              class="
+                card
+                projstrip
+                grow2
+                mt-3
+                elevation-3
+                selectable1
+                border-0
+                grow2
+              "
               v-for="proj in projects"
               :key="proj.id"
               @click="routeTo(proj.id)"
@@ -118,6 +127,7 @@ import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { accountService } from "../services/AccountService"
 import { useRouter } from "vue-router"
+import { Offcanvas } from "bootstrap"
 export default {
   setup() {
     let edit = ref(true)
@@ -125,6 +135,7 @@ export default {
     const router = useRouter()
 
     return {
+      router,
       editProfile,
       edit,
       account: computed(() => AppState.account),
@@ -198,5 +209,11 @@ export default {
 .scroll::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+.grow2 {
+  transition: all 0.2s ease-in-out;
+}
+.grow2:hover {
+  transform: scale(1.02);
 }
 </style>

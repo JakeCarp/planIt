@@ -41,10 +41,10 @@ class TasksService {
   }
 
   async update(taskData) {
-    const task = await this.getById(taskData.id)
-    if (task.creatorId.toString() !== taskData.creatorId) {
-      throw new Forbidden('This is not your Task')
-    }
+    // const task = await this.getById(taskData.id)
+    // if (task.creatorId.toString() !== taskData.creatorId) {
+    //   throw new Forbidden('This is not your Task')
+    // }
     const update = await dbContext.Tasks.findOneAndUpdate({ _id: taskData.id, creatorId: taskData.creatorId }, taskData, { new: true })
     return update
   }

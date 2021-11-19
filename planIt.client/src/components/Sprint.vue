@@ -1,6 +1,6 @@
 <template>
   <div class="sprints">
-    <div class="accordion-item collapsestyle">
+    <div class="accordion-item collapsestyle mt-1">
       <div class="accordion-header collapsestyle d-flex">
         <div class="wid d-flex justify-content-between align-items-center">
           <div
@@ -50,7 +50,7 @@
                     class="codefont weightsize me-1"
                     type="number"
                     required
-                    placeholder=""
+                    placeholder="1"
                     min="1"
                     max="50"
                     name="weight"
@@ -74,6 +74,15 @@
                   tasks.length
                 }}
               </p>
+            </div>
+            <div
+              class="d-flex align-items-center"
+              v-if="tasks.length === 0 && sprint.creatorId === account.id"
+            >
+              <i
+                @click="removeSprint"
+                class="mdi mdi-trash-can text-danger m-0 selectable"
+              ></i>
             </div>
           </div>
         </div>

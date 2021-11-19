@@ -25,12 +25,18 @@
           <div class="modal-body">
             <form id="projForm" @submit.prevent="handleSubmit">
               <p class="m-0">Name:</p>
-              <input v-model="projectData.name" class="m-2" type="text" />
+              <input
+                required
+                v-model="projectData.name"
+                class="m-2 border-dark"
+                type="text"
+              />
               <p class="m-0">Description:</p>
               <textarea
                 v-model="projectData.description"
-                class="m-2"
+                class="m-2 border-dark"
                 cols="50"
+                required
               />
               <div></div>
             </form>
@@ -47,6 +53,7 @@
               type="submit"
               form="projForm"
               class="btn btn-primary text-white"
+              data-bs-dismiss="modal"
             >
               {{ projectData.id ? "Save" : "Create" }}
             </button>
@@ -96,7 +103,7 @@ export default {
 
           }
           const modelElem = document.getElementById('aundefineda')
-          Modal.getOrCreateInstance(modelElem).toggle()
+          Modal.getOrCreateInstance(modelElem).hide()
 
         } catch (error) {
           logger.error(error)

@@ -31,7 +31,9 @@ AppState.sprints.splice(index, 1, updated)
 async removeSprint(projectId, id){
   const res = await api.delete('api/projects/' + projectId + '/sprints/'+id)
   logger.log('REMOVE SPRINT', res.data)
-  AppState.sprints.filter( s => s.id !== id)
+  let newSprints =  AppState.sprints.filter( s => s.id !== id)
+  AppState.sprints = newSprints
+  this.getAll(projectId)
 }
 }
 export const sprintsService = new SprintsService()

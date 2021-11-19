@@ -37,6 +37,7 @@
                   <form>
                     <label class="codefont me-1">Name:</label>
                     <input
+                      required
                       class="codefont"
                       type="text"
                       placeholder="...scheme name"

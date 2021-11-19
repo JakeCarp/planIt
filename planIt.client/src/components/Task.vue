@@ -14,7 +14,7 @@
       </p>
     </div>
     <div class="col-3 d-flex">
-      <div class="dropdown d-flex">
+      <div v-if="task.creatorId === account.id" class="dropdown d-flex">
         <button
           class="btn btn-secondary dropdown-toggle"
           type="button"
@@ -33,7 +33,7 @@
                 : 'dropdown-item'
             "
           >
-            <p class="m-0 text-center">{{ s.name }}</p>
+            <p class="m-0 text-center">{{ s.name.toUpperCase() }}</p>
           </li>
         </ul>
       </div>
@@ -68,6 +68,7 @@ export default {
       route,
       sprints: computed(() => AppState.sprints),
       notes: computed(() => AppState.notes.filter(n => n.taskId === props.task.id)),
+      account: computed(() => AppState.account),
       async toggleTask() {
         try {
           await tasksService.editTask(props.task, route.params.projectId, props.task.id)
@@ -79,6 +80,7 @@ export default {
       async moveTask(sprintId) {
         try {
           await tasksService.editTask({ sprintId: sprintId }, route.params.projectId, props.task.id)
+          Pop.toast('Task Moved', 'success')
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

@@ -27,7 +27,7 @@
         >
           Complete
         </button>
-        <span>------------</span>
+        <div class="card line"></div>
         <button
           :class="
             task.isComplete
@@ -71,6 +71,7 @@
       </div>
       <div class="mt-3 mb-3 input-group d-flex flex-row justify-content-center">
         <textarea
+          class="border-dark"
           v-model="noteData"
           rows="2"
           cols="35"
@@ -83,6 +84,10 @@
       <div class="col-12 scroll d-flex flex-column">
         <div v-for="n in notes" :key="n.id" class="note">
           <div v-if="n.creatorId === account.id" class="d-flex ms-3">
+            <i
+              class="mdi mdi-trash-can text-secondary selectable1"
+              @click="removeNote(n.id)"
+            ></i>
             <div
               class="right-bubble bg-dark d-flex justify-content-end rounded"
             >
@@ -90,6 +95,7 @@
                 <p class="ps-2 mt-1 m-0 me-5 text-white">{{ n.body }}</p>
               </div>
             </div>
+
             <div class="d-flex flex-column align-items-center">
               <img
                 :src="account.picture"
@@ -210,6 +216,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.line {
+  width: 22vh;
+  height: 0.5px;
+  background-color: black;
+  border: 0;
+}
 .widt {
   max-width: 50vh;
 }

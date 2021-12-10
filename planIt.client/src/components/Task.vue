@@ -22,7 +22,9 @@
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-        ></button>
+        >
+          Move Task
+        </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li
             @click="moveTask(s.id)"
@@ -49,47 +51,57 @@
 
 
 <script>
-import { computed } from '@vue/reactivity'
-import { AppState } from '../AppState'
-import { momentService } from '../services/MomentService'
-import { logger } from '../utils/Logger'
-import Pop from '../utils/Pop'
-import { tasksService } from '../services/TasksService'
-import { useRoute } from 'vue-router'
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState";
+import { momentService } from "../services/MomentService";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { tasksService } from "../services/TasksService";
+import { useRoute } from "vue-router";
 export default {
   props: {
     task: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
-    const route = useRoute()
+    const route = useRoute();
     return {
       route,
       sprints: computed(() => AppState.sprints),
-      notes: computed(() => AppState.notes.filter(n => n.taskId === props.task.id)),
+      notes: computed(() =>
+        AppState.notes.filter((n) => n.taskId === props.task.id)
+      ),
       account: computed(() => AppState.account),
       async toggleTask() {
         try {
-          await tasksService.editTask(props.task, route.params.projectId, props.task.id)
+          await tasksService.editTask(
+            props.task,
+            route.params.projectId,
+            props.task.id
+          );
         } catch (error) {
-          logger.log(error)
-          Pop.toast(error.message, 'error')
+          logger.log(error);
+          Pop.toast(error.message, "error");
         }
       },
       async moveTask(sprintId) {
         try {
-          await tasksService.editTask({ sprintId: sprintId }, route.params.projectId, props.task.id)
-          Pop.toast('Task Moved', 'success')
+          await tasksService.editTask(
+            { sprintId: sprintId },
+            route.params.projectId,
+            props.task.id
+          );
+          Pop.toast("Task Moved", "success");
         } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
+          logger.error(error);
+          Pop.toast(error.message, "error");
         }
-      }
-    }
-  }
-}
+      },
+    };
+  },
+};
 </script>
 
 

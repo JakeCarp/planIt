@@ -16,6 +16,7 @@
     <div class="col-3 d-flex">
       <div v-if="task.creatorId === account.id" class="dropdown d-flex">
         <button
+          v-if="sprints.length > 1"
           class="btn btn-secondary dropdown-toggle"
           type="button"
           id="dropdownMenuButton1"

@@ -45,7 +45,7 @@
                     name="title"
                     v-model="taskData.name"
                   />
-                  <label class="codefont me-1 ms-1">Goons:</label>
+                  <label class="codefont me-1 ms-1">Goons Needed:</label>
                   <input
                     class="codefont weightsize me-1"
                     type="number"

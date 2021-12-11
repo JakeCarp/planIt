@@ -84,7 +84,7 @@
                   :index="index"
                 />
               </div>
-              <h3 class="codefont" v-else>Please Add A Scheme</h3>
+              <h3 class="codefont" v-else>Add a Scheme to start!</h3>
             </div>
           </div>
         </div>

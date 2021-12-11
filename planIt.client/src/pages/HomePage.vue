@@ -1,18 +1,25 @@
 <template>
-  <div class="home container-fluid">
+  <div
+    class="
+      home
+      container-fluid
+      d-flex
+      justify-content-center
+      align-items-center
+    "
+  >
     <div
       class="
         justify-content-center
         animate__animated animate__zoomInLeft
         backwhite
-        size
-        container-fluid
+        border border-black
       "
     >
       <div class="col-12">
-        <div class="row justify-content-center">
-          <div class="col-7">
-            <div class="d-flex topsize justify-content-between">
+        <div class="row size justify-content-center align-items-center">
+          <div class="col-8">
+            <div class="d-flex justify-content-between">
               <div class="align-self-end">
                 <p class="font m-0">Your Plots:</p>
               </div>
@@ -28,7 +35,7 @@
               </div>
             </div>
           </div>
-          <div class="col-7">
+          <div class="col-8">
             <div class="col-12 d-flex justify-content-between">
               <div class="col-7">
                 <h5 class="onlyfont mt-1 mb-0">Name:</h5>
@@ -75,7 +82,7 @@
                       px-1
                       border border-0 border-dark
                       rounded
-                      bg-danger
+                      bg-secondary
                     "
                   ></i>
                 </div>
@@ -138,21 +145,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.home {
+  height: 89vh;
+}
 .backwhite {
-  background-image: url("../assets/img/Large.png");
-  background-size: fill;
-  background-repeat: no-repeat;
-  background-position: 100%;
+  background-color: aliceblue;
+  border-width: 5px !important;
+  border-style: solid !important;
+  border-color: black !important;
+  width: 80%;
+  height: 70vh;
+}
+.size {
+  height: 70vh;
 }
 .scard {
   width: 100%;
 }
-.size {
-  height: 89vh;
-}
-.topsize {
-  height: 30vh;
-}
+
 .font {
   font-family: "Bangers", cursive;
   font-size: 7vh !important;
@@ -185,28 +195,13 @@ export default {
   height: 28vh;
   overflow-y: scroll;
 }
-@media only screen and (max-width: 1150px) {
-  .backwhite {
-    background-image: url("../assets/img/Small.png") !important;
-    background-size: fill;
-    background-repeat: no-repeat;
-    background-position: 100%;
-  }
-}
-@media only screen and (max-width: 1427px) {
-  .backwhite {
-    background-image: url("../assets/img/Medium.png");
-    background-size: fill;
-    background-repeat: no-repeat;
-    background-position: 100%;
-  }
-  // @media only screen and (max-width: 1600px) {
-  //   .backwhite {
-  //     background-image: url("../assets/img/ExtraLarge.png");
-  //     background-size: fill;
-  //     background-repeat: no-repeat;
-  //     background-position: 100%;
-  //   }
-  // }
-}
+
+// @media only screen and (max-width: 1600px) {
+//   .backwhite {
+//     background-image: url("../assets/img/ExtraLarge.png");
+//     background-size: fill;
+//     background-repeat: no-repeat;
+//     background-position: 100%;
+//   }
+// }
 </style>

@@ -11,7 +11,7 @@
     <div
       class="
         justify-content-center
-        animate__animated animate__zoomInLeft
+        animate__animated animate__fadeIn
         backwhite
         border border-black
       "
@@ -40,12 +40,10 @@
               <div class="col-7">
                 <h5 class="onlyfont mt-1 mb-0">Name:</h5>
               </div>
-              <div class="col-3">
-                <h5 class="onlyfont mb-0">Started:</h5>
-              </div>
+              <div class="col-3"></div>
             </div>
             <div>
-              <div class="scroll container">
+              <div class="scrollbar container">
                 <div
                   class="d-flex align-items-center"
                   v-for="proj in projects"
@@ -191,11 +189,22 @@ export default {
 .spacing {
   letter-spacing: 1.7px !important;
 }
-.scroll {
+.scrollbar {
   height: 28vh;
   overflow-y: scroll;
 }
-
+.scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: #2e2e2ebd;
+  width: 7px;
+  border-radius: 7px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #adadad;
+  border-radius: 7px;
+}
 // @media only screen and (max-width: 1600px) {
 //   .backwhite {
 //     background-image: url("../assets/img/ExtraLarge.png");

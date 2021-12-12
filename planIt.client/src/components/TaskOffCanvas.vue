@@ -85,6 +85,7 @@
         <div v-for="n in notes" :key="n.id" class="note">
           <div v-if="n.creatorId === account.id" class="d-flex ms-3">
             <i
+              title="Remove Note"
               class="mdi mdi-trash-can text-secondary selectable1"
               @click="removeNote(n.id)"
             ></i>

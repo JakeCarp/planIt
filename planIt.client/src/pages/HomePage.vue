@@ -38,12 +38,14 @@
           <div class="col-8">
             <div class="col-12 d-flex justify-content-between">
               <div class="col-7">
-                <h5 class="onlyfont mt-1 mb-0">Name:</h5>
+                <h5 v-if="projects.length > 0" class="onlyfont mt-1 mb-0">
+                  Name:
+                </h5>
               </div>
               <div class="col-3"></div>
             </div>
             <div>
-              <div class="scrollbar container">
+              <div v-if="projects.length > 0" class="scrollbar container">
                 <div
                   class="d-flex align-items-center"
                   v-for="proj in projects"
@@ -84,6 +86,11 @@
                     "
                   ></i>
                 </div>
+              </div>
+              <div v-else class="scrollbar container">
+                <p class="pt-4 f-20 onlyfont text-center">
+                  Add a new plot to start!
+                </p>
               </div>
             </div>
           </div>
